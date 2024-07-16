@@ -1,0 +1,114 @@
+{
+  "Transactions": [
+    {
+      "DOCNUM": "CCI11000051",
+      "SALESBCODE": 1,
+      "MODULECODE": 4,
+      "MEMPOINTSBUY": 0.0,
+      "MEMPOINTSREDEEM": 0.0,
+      "MEMBERNO": "PPL000101",
+      "CUSCODE": "CUS64467",
+      "SALESBRANCH": "BRANCH 1",
+      "SALEDATE": "2024-01-09T00:00:00",
+      "ItemCount": 1,
+      "Itmtotalinc": 48.0
+    },
+    {
+      "DOCNUM": "SNV10000524",
+      "SALESBCODE": 1,
+      "MODULECODE": 4,
+      "MEMPOINTSBUY": 0.0,
+      "MEMPOINTSREDEEM": 0.0,
+      "MEMBERNO": "PPL000101",
+      "CUSCODE": "CUS64471",
+      "SALESBRANCH": "BRANCH 1",
+      "SALEDATE": "2024-01-09T00:00:00",
+      "ItemCount": 2,
+      "Itmtotalinc": 2.0
+    },
+    {
+      "DOCNUM": "CCN00010113",
+      "SALESBCODE": 1,
+      "MODULECODE": 5,
+      "MEMPOINTSBUY": 0.0,
+      "MEMPOINTSREDEEM": 0.0,
+      "MEMBERNO": "PPL000101",
+      "CUSCODE": "CUS64471",
+      "SALESBRANCH": "BRANCH 1",
+      "SALEDATE": "2023-08-21T00:00:00",
+      "ItemCount": 2,
+      "Itmtotalinc": -449.0
+    },
+    {
+      "DOCNUM": "SNV10000486",
+      "SALESBCODE": 1,
+      "MODULECODE": 4,
+      "MEMPOINTSBUY": 0.0,
+      "MEMPOINTSREDEEM": 0.0,
+      "MEMBERNO": "PPL000101",
+      "CUSCODE": "CUS64471",
+      "SALESBRANCH": "BRANCH 1",
+      "SALEDATE": "2023-08-21T00:00:00",
+      "ItemCount": 1,
+      "Itmtotalinc": 499.0
+    },
+    {
+      "DOCNUM": "SNV60000031",
+      "SALESBCODE": 6,
+      "MODULECODE": 4,
+      "MEMPOINTSBUY": 0.0,
+      "MEMPOINTSREDEEM": 0.0,
+      "MEMBERNO": "PPL000101",
+      "CUSCODE": "CUS64454",
+      "SALESBRANCH": "BRANCH 6",
+      "SALEDATE": "2023-07-11T00:00:00",
+      "ItemCount": 3,
+      "Itmtotalinc": 182865.0
+    },
+    {
+      "DOCNUM": "SNV60000032",
+      "SALESBCODE": 6,
+      "MODULECODE": 4,
+      "MEMPOINTSBUY": 0.0,
+      "MEMPOINTSREDEEM": 0.0,
+      "MEMBERNO": "PPL000101",
+      "CUSCODE": "CUS64454",
+      "SALESBRANCH": "BRANCH 6",
+      "SALEDATE": "2023-07-11T00:00:00",
+      "ItemCount": 1,
+      "Itmtotalinc": 7125.0
+    }
+  ],
+  "TransactionsDetails": [
+    {
+      "docnumber": "SNV60000031",
+      "saledate": "2023-07-11T00:00:00",
+      "itmcode": "A0002",
+      "itmname": "210 MAIZE 1KG",
+      "quantity": 90,
+      "totalCost": 171720,
+      "mempointsbuy": 0,
+      "mempointsredeem": 0
+    },
+    {
+      "docnumber": "SNV60000031",
+      "saledate": "2023-07-11T00:00:00",
+      "itmcode": "M0042",
+      "itmname": "MARA SUGAR 1KG",
+      "quantity": 5,
+      "totalCost": 8845,
+      "mempointsbuy": 0,
+      "mempointsredeem": 0
+    },
+    {
+      "docnumber": "SNV60000031",
+      "saledate": "2023-07-11T00:00:00",
+      "itmcode": "P0084",
+      "itmname": "PARAFAST ET 1000MG 8s TABS",
+      "quantity": 10,
+      "totalCost": 2300,
+      "mempointsbuy": 0,
+      "mempointsredeem": 0
+    }
+  ]
+}
