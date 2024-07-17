@@ -92,8 +92,8 @@ function Login({ navigation }) {
       );
       if (response.ok) {
         let data = await response.json();
-        console.log(data);
-        setIsLoading(false);
+        // console.log(data);
+        // setIsLoading(false);
         // setFormData({
         //   nationalID: "",
         //   pin: "",
@@ -102,12 +102,11 @@ function Login({ navigation }) {
         await AsyncStorage.setItem("memberno", data.user.memberno);
         await AsyncStorage.setItem("fullusername", data.user.fullusername);
 
-        return navigation.navigate("Dashboard");
+        navigation.navigate("Dashboard");
       } else {
         let data = await response.json();
-        console.log(data);
-        setIsLoading(false);
-
+        // console.log(data);
+        // setIsLoading(false);
         setError(data.errors.message);
         // alert(data.errors.message);
       }
@@ -116,7 +115,9 @@ function Login({ navigation }) {
       setIsLoading(false);
       alert("Check your internet connection!");
       // ADD THIS THROW error
-      throw new Error(error);
+      // throw new Error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
   // const handleLogin = async () => {
@@ -190,16 +191,12 @@ function Login({ navigation }) {
     validate()
       ? handleLogin()
       : ToastAndroid.showWithGravityAndOffset(
-          "Please fill in the blanks !",
+          "Please fill in the blanks!",
           ToastAndroid.LONG,
           ToastAndroid.BOTTOM,
           25,
           50
         );
-    // : Snackbar.show({
-    //     text: "Hello world",
-    //     duration: Snackbar.LENGTH_SHORT,
-    //   });
   };
 
   return (
