@@ -18,7 +18,7 @@ import {
   Link,
 } from "native-base";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import Data from "../data.json";
 import Colors from "../config/colors";
 
 function Transactions({ navigation }) {
@@ -35,7 +35,7 @@ function Transactions({ navigation }) {
     if (token || memberno) {
       //  PP000008 PPL000031
       return fetch(
-        `http://www.phamacoretraining.co.ke:81/Auth/CustomerPoints/GetCustomerTransactions?memberNo=${memberno}`,
+        `http://www.phamacoretraining.co.ke:81/CustomerPoints/GetCustomerTransactions?memberNo=${memberno}`,
         {
           method: "GET", // GET, POST, PUT, DELETE, etc.
           headers: {
@@ -91,7 +91,7 @@ function Transactions({ navigation }) {
           <Center flex={1}>
             <ActivityIndicator size="large" color="#0000ff" />
           </Center>
-        ) : transactions.length > 0 ? (
+        ) : Data.Transactions.length > 0 ? (
           <ScrollView
             // bg="indigo.200"
             px={3}
@@ -99,7 +99,7 @@ function Transactions({ navigation }) {
               <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
             }
           >
-            {transactions.map((transaction, index) => (
+            {Data.Transactions.map((transaction, index) => (
               <Link
                 onPress={() =>
                   navigation.navigate("transactionDetails", {
