@@ -76,7 +76,7 @@ function Login({ navigation }) {
     setError("");
     try {
       let response = await fetch(
-        `http://www.phamacoretraining.co.ke:81/Auth/CustomerPoints/CustomerLogin`,
+        `http://www.phamacoretraining.co.ke:81/CustomerPoints/CustomerLogin`,
         {
           method: "POST", // *GET, POST, PUT, DELETE, etc.
           headers: {
@@ -92,8 +92,8 @@ function Login({ navigation }) {
       );
       if (response.ok) {
         let data = await response.json();
-        // console.log(data);
-        // setIsLoading(false);
+        console.log(data);
+        setIsLoading(false);
         // setFormData({
         //   nationalID: "",
         //   pin: "",
@@ -102,11 +102,11 @@ function Login({ navigation }) {
         await AsyncStorage.setItem("memberno", data.user.memberno);
         await AsyncStorage.setItem("fullusername", data.user.fullusername);
 
-        navigation.navigate("Dashboard");
+        return navigation.navigate("Dashboard");
       } else {
         let data = await response.json();
-        // console.log(data);
-        // setIsLoading(false);
+        console.log(data);
+        setIsLoading(false);
         setError(data.errors.message);
         // alert(data.errors.message);
       }
@@ -115,9 +115,7 @@ function Login({ navigation }) {
       setIsLoading(false);
       alert("Check your internet connection!");
       // ADD THIS THROW error
-      // throw new Error(error);
-    } finally {
-      setIsLoading(false);
+      throw new Error(error);
     }
   };
   // const handleLogin = async () => {
