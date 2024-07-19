@@ -36,7 +36,7 @@ function TransactionDetails({ route }) {
     // let memberno = await SecureStore.getItemAsync("memberno");
     if (token || memberno) {
       return fetch(
-        `http://www.phamacoretraining.co.ke:81/Auth/CustomerPoints/GetTransactionDetails?salesBcode=${salesBCODE}&docNum=${docNum}&memberNumber=${memberno}`,
+        `http://www.phamacoretraining.co.ke:81/CustomerPoints/GetTransactionDetails?salesBcode=${salesBCODE}&docNum=${docNum}&memberNumber=${memberno}`,
         {
           method: "GET", // GET, POST, PUT, DELETE, etc.
           headers: {
