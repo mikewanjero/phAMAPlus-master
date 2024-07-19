@@ -19,6 +19,7 @@ import {
   Link,
 } from "native-base";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Data from "../data.json";
 
 import Colors from "../config/colors";
 
@@ -37,7 +38,7 @@ function Dashboard({ navigation }) {
     let memberno = await AsyncStorage.getItem("memberno");
     if (token && memberno) {
       return fetch(
-        `http://www.phamacoretraining.co.ke:81/Auth/CustomerPoints/GetCustomerTransactions?memberNo=${memberno}`,
+        `http://www.phamacoretraining.co.ke:81/CustomerPoints/GetCustomerTransactions?memberNo=${memberno}`,
         {
           method: "GET", // GET, POST, PUT, DELETE, etc.
           headers: {
@@ -79,7 +80,7 @@ function Dashboard({ navigation }) {
     let memberno = await AsyncStorage.getItem("memberno");
     if (token && memberno) {
       return fetch(
-        `http://www.phamacoretraining.co.ke:81/Auth/Customers/members?memberNum=${memberno}`,
+        `http://www.phamacoretraining.co.ke:81/Customers/membersDetails?memberNum=${memberno}`,
         {
           method: "GET", // GET, POST, PUT, DELETE, etc.
           headers: {
@@ -146,7 +147,7 @@ function Dashboard({ navigation }) {
                 fontSize={"xs"}
                 color={Colors.phAMACoreColor1}
               >
-                {userData.membername}
+                {userData?.membername}
               </Text>
             </VStack>
           </Box>
@@ -209,7 +210,7 @@ function Dashboard({ navigation }) {
                     fontWeight="500"
                     fontSize="2xs"
                   >
-                    {userData.membername}
+                    {userData?.membername}
                   </Text>
                 </HStack>
                 <HStack alignItems="center">
@@ -285,8 +286,8 @@ function Dashboard({ navigation }) {
                 <Center flex={1}>
                   <ActivityIndicator size="large" color="#0000ff" />
                 </Center>
-              ) : transactions ? (
-                transactions?.map((transaction, index) => (
+              ) : Data.Transactions ? (
+                Data.Transactions?.map((transaction, index) => (
                   <Link
                     onPress={() =>
                       navigation.navigate("transactionDetails", {
