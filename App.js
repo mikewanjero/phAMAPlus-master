@@ -9,6 +9,7 @@ import Transactions from "./components/Transactions";
 import Profile from "./components/Profile";
 import Landing from "./components/Landing";
 import Login from "./components/Login";
+import Signup from "./components/SignUp";
 import TransactionDetails from "./components/TransactionDetails";
 import { Text } from "react-native";
 
@@ -113,6 +114,13 @@ export default function App() {
         <Stack.Screen
           name="Login"
           component={Login}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Signup"
+          component={Signup}
           options={{
             headerShown: false,
           }}
