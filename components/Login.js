@@ -44,8 +44,8 @@ function Login({ navigation }) {
     pin: "1077",
   });
   const [errors, setErrors] = useState({
-    nationalID: "",
-    pin: "",
+    // nationalID: "",
+    // pin: "",
   });
   const [show, setShow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -113,7 +113,7 @@ function Login({ navigation }) {
     } catch (error) {
       console.log(error);
       setIsLoading(false);
-      alert("Check your internet connection!");
+      alert("Error logging in. Check your credentials!");
       // ADD THIS THROW error
       throw new Error(error);
     }
@@ -218,7 +218,7 @@ function Login({ navigation }) {
                 color: "warmGray.50",
               }}
             >
-              phAMACore
+              phAMACore™
             </Heading>
           </Center>
         </View>
@@ -322,13 +322,14 @@ function Login({ navigation }) {
                   }}
                   alignSelf="flex-end"
                   mt="1"
+                  onPress={() => navigation.navigate()}
                 >
                   Forget Password?
                 </Link>
               </FormControl>
               <Button
                 mt="2"
-                bg={Colors.phAMACoreColor2}
+                bg={Colors.phAMACoreColor3}
                 // colorScheme="indigo"
                 _text={{
                   fontSize: "md",
@@ -358,7 +359,7 @@ function Login({ navigation }) {
                     fontWeight: "medium",
                     fontSize: "sm",
                   }}
-                  href="#"
+                  onPress={() => navigation.navigate("Signup")}
                 >
                   Sign Up
                 </Link>
