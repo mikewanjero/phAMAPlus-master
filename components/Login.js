@@ -322,7 +322,7 @@ function Login({ navigation }) {
                   }}
                   alignSelf="flex-end"
                   mt="1"
-                  onPress={() => navigation.navigate()}
+                  onPress={() => navigation.navigate("Forget Password")}
                 >
                   Forget Password?
                 </Link>
@@ -359,7 +359,6 @@ function Login({ navigation }) {
                     fontWeight: "medium",
                     fontSize: "sm",
                   }}
-                  onPress={() => navigation.navigate("Signup")}
                 >
                   Sign Up
                 </Link>
