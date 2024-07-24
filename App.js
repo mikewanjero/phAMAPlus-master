@@ -9,6 +9,7 @@ import Transactions from "./components/Transactions";
 import Profile from "./components/Profile";
 import Landing from "./components/Landing";
 import Login from "./components/Login";
+import ForgetPassword from "./components/ForgetPassword";
 import Signup from "./components/SignUp";
 import TransactionDetails from "./components/TransactionDetails";
 import { Text } from "react-native";
@@ -119,8 +120,8 @@ export default function App() {
           }}
         />
         <Stack.Screen
-          name="Signup"
-          component={Signup}
+          name="Forget Password"
+          component={ForgetPassword}
           options={{
             headerShown: false,
           }}
