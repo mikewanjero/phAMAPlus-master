@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, RefreshControl, ActivityIndicator } from "react-native";
+import {
+  StyleSheet,
+  RefreshControl,
+  ActivityIndicator,
+  BackHandler,
+} from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 import {
   NativeBaseProvider,
   Box,
@@ -29,6 +35,20 @@ function Dashboard({ navigation }) {
   const [isLoading, setIsLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   // PPL000101
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        navigation.navigate("Landing");
+        return true;
+      };
+
+      BackHandler.addEventListener("hardwareBackPress", onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener("hardwareBackPress", onBackPress);
+    }, [navigation])
+  );
 
   const handleTransactions = async () => {
     setIsLoading(true);
