@@ -218,7 +218,7 @@ function Login({ navigation }) {
                 color: "warmGray.50",
               }}
             >
-              phAMACore™
+              phAMACore™ Loyalty
             </Heading>
           </Center>
         </View>
@@ -324,7 +324,7 @@ function Login({ navigation }) {
                   mt="1"
                   onPress={() => navigation.navigate("Forget Password")}
                 >
-                  Forget Password?
+                  Forgot Password?
                 </Link>
               </FormControl>
               <Button
@@ -343,7 +343,7 @@ function Login({ navigation }) {
               >
                 Sign in
               </Button>
-              <HStack my="3" justifyContent="center">
+              {/* <HStack my="3" justifyContent="center">
                 <Text
                   fontSize="sm"
                   color="coolGray.600"
@@ -362,7 +362,7 @@ function Login({ navigation }) {
                 >
                   Sign Up
                 </Link>
-              </HStack>
+              </HStack> */}
             </VStack>
           </Box>
         </Center>
