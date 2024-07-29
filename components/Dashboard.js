@@ -59,7 +59,7 @@ function Dashboard({ navigation }) {
     let memberno = await AsyncStorage.getItem("memberno");
     if (token && memberno) {
       return fetch(
-        `http://www.phamacoretraining.co.ke:81/CustomerPoints/GetCustomerTransactions?memberNo=${memberno}`,
+        `http://www.phamacoretraining.co.ke:81/CustomerPoints/membersDetails?memberNo=${memberno}`,
         {
           method: "GET", // GET, POST, PUT, DELETE, etc.
           headers: {
