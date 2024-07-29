@@ -168,7 +168,7 @@ function Dashboard({ navigation }) {
         <View flex={1} bg="coolGray.100">
           <Box px="2" py="1">
             <VStack>
-              <Text fontSize={"2xs"}> Welcome back,{username}</Text>
+              <Text fontSize={"2xs"}> Welcome back, {username}</Text>
               <Text
                 fontWeight={"semibold"}
                 fontSize={"xs"}
