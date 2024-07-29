@@ -34,6 +34,7 @@ function Dashboard({ navigation }) {
   const [transactions, setTransactions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [username, setUsername] = useState("");
   // PPL000101
 
   useFocusEffect(
@@ -98,6 +99,12 @@ function Dashboard({ navigation }) {
     // let memberno = await SecureStore.getItemAsync("memberno");
     let token = await AsyncStorage.getItem("token");
     let memberno = await AsyncStorage.getItem("memberno");
+    let fullusername = await AsyncStorage.getItem("fullusername");
+    if (fullusername) {
+      setUsername(fullusername);
+    } else {
+      alert("No values stored under that key.");
+    }
     if (token && memberno) {
       return fetch(
         `http://www.phamacoretraining.co.ke:81/Customers/membersDetails?memberNum=${memberno}`,
@@ -161,7 +168,7 @@ function Dashboard({ navigation }) {
         <View flex={1} bg="coolGray.100">
           <Box px="2" py="1">
             <VStack>
-              <Text fontSize={"2xs"}> Welcome back,</Text>
+              <Text fontSize={"2xs"}> Welcome back,{username}</Text>
               <Text
                 fontWeight={"semibold"}
                 fontSize={"xs"}
