@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { KeyboardAvoidingView, Platform } from "react-native";
+import { KeyboardAvoidingView, Platform, ToastAndroid } from "react-native";
 import {
   NativeBaseProvider,
   Box,
@@ -38,6 +38,7 @@ function Profile({ navigation }) {
   const [show, setShow] = useState(false);
   const [userName, setUserName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const validate = () => {
     if (!formData.currentPin && !formData.newPin) {
@@ -58,10 +59,59 @@ function Profile({ navigation }) {
     return true;
   };
 
-  const handleSubmit = () => {};
+  const handleUpdate = async () => {
+    setIsLoading(true);
+    setError("");
+    try {
+      let response = await fetch(
+        `http://www.phamacoretraining.co.ke:81/CustomerPoints/UpdatePassword/${memberNumber}`,
+        {
+          method: "UPDATE",
+          headers: {
+            Accept: "application/json",
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            nationalID: formData.nationalID,
+            currentPin: formData.currentPin,
+            newPin: formData.newPin,
+          }),
+        }
+      );
+      if (response.ok) {
+        let data = response.json();
+        console.log(data);
+        setIsLoading(false);
+        await AsyncStorage.setItem("token", data.token);
+        await AsyncStorage.setItem("memberno", data.user.memberno);
+        await AsyncStorage.setItem("fullusername", data.user.fullusername);
+      } else {
+        let data = response.json();
+        console.log(data);
+        setIsLoading(false);
+        setError(data.errors.message);
+      }
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+      alert("Error logging in!");
+      throw new Error(error);
+    }
+  };
+
+  const handleSubmit = () => {
+    validate()
+      ? handleUpdate()
+      : ToastAndroid.showWithGravityAndOffset(
+          "Fill in the blanks!",
+          ToastAndroid.LONG,
+          ToastAndroid.BOTTOM,
+          25,
+          50
+        );
+  };
 
   const fetchData = async () => {
-    // let fullusername = await SecureStore.getItemAsync("fullusername");
     let fullusername = await AsyncStorage.getItem("fullusername");
     if (fullusername) {
       setUserName(fullusername);
