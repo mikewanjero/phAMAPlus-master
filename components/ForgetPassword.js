@@ -20,6 +20,7 @@ import {
   Heading,
   Center,
   KeyboardAvoidingView,
+  ScrollView,
 } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -29,17 +30,19 @@ export default function ForgetPassword({ navigation }) {
   const [formData, setFormData] = useState({
     nationalID: "200011233",
     pin: "",
+    confirmPin: "",
   }); //State displaying data inputs (creating new user) - key and object
   const [show, setShow] = useState(false); //State to show or hide input text and visibility
   const [error, setError] = useState(""); //State to display an error when logging in
   const [errors, setErrors] = useState({}); //Display errors in validation incase of missing inputs
 
   const validate = () => {
-    if (!formData.nationalID && !formData.pin) {
+    if (!formData.nationalID && !formData.pin && !formData.confirmPin) {
       setErrors({
         ...errors,
         nationalID: "National ID is required",
         pin: "Pin is required",
+        confirmPin: "Confirm Pin is required",
       });
       return false;
     } else if (!formData.nationalID) {
@@ -48,8 +51,23 @@ export default function ForgetPassword({ navigation }) {
     } else if (!formData.pin) {
       setErrors({ ...errors, pin: "Pin is required" });
       return false;
+    } else if (!formData.pin) {
+      setErrors({ ...errors, pin: "Confirm Pin is required" });
+      return false;
     }
     setErrors({ ...errors, nationalID: "200011233", pin: "" });
+    return true;
+  };
+
+  const passwordsMatch = () => {
+    if (formData.pin !== formData.confirmPin) {
+      setErrors({
+        ...errors,
+        confirmPin: "New Pin and Confirm Pin do not match",
+      });
+      return false;
+    }
+    setErrors({ ...errors, confirmPin: "" });
     return true;
   };
 
@@ -69,6 +87,7 @@ export default function ForgetPassword({ navigation }) {
           body: JSON.stringify({
             idnumber: formData.nationalID,
             pin: formData.pin,
+            confirmPin: formData.confirmPin,
           }),
         }
       );
@@ -99,15 +118,17 @@ export default function ForgetPassword({ navigation }) {
   };
 
   const handleSubmit = () => {
-    validate()
-      ? handleLogin()
-      : ToastAndroid.showWithGravityAndOffset(
-          "Please fill in the blanks!",
-          ToastAndroid.LONG,
-          ToastAndroid.BOTTOM,
-          25,
-          50
-        );
+    if (validate() && passwordsMatch()) {
+      handleLogin();
+    } else {
+      ToastAndroid.showWithGravityAndOffset(
+        "Please fill in the blanks correctly!",
+        ToastAndroid.LONG,
+        ToastAndroid.BOTTOM,
+        25,
+        50
+      );
+    }
   };
 
   return (
@@ -152,64 +173,104 @@ export default function ForgetPassword({ navigation }) {
               Enter a new pin below.
             </Heading>
             <VStack space={3} mt={"5"}>
-              <FormControl>
-                <FormControl.Label>National ID</FormControl.Label>
-                <Input
-                  placeholder="12345678"
-                  placeholderTextColor="#707070"
-                  value={formData.nationalID}
-                  onChangeText={(value) =>
-                    setFormData({ ...formData, nationalID: value })
-                  }
-                  borderWidth={1}
-                  borderColor={"gray.400"}
-                />
-              </FormControl>
-              <FormControl>
-                <FormControl.Label>Password</FormControl.Label>
-                <Input
-                  type={show ? "text" : "password"}
-                  keyboardType="numeric"
-                  value={formData.pin}
-                  onChangeText={(value) =>
-                    setFormData({ ...formData, pin: value })
-                  }
-                  borderWidth={1}
-                  borderColor={"gray.400"}
-                  InputRightElement={
-                    <Pressable onPress={() => setShow(!show)}>
-                      <Icon
-                        as={
-                          <MaterialIcons
-                            name={show ? "visibility" : "visibility-off"}
-                          />
-                        }
-                        size={5}
-                        mr={2}
-                        color={"gray.600"}
-                      />
-                    </Pressable>
-                  }
-                />
-                {"pin" in errors ? (
-                  <FormControl.ErrorMessage>
-                    {errors.pin}
-                  </FormControl.ErrorMessage>
-                ) : (
-                  ""
-                )}
-              </FormControl>
-              <Button
-                mt={"7"}
-                bg={colors.phAMACoreColor3}
-                p={4}
-                _text={{ fontSize: 14, fontWeight: "semibold", color: "white" }}
-                isLoading={isLoading}
-                isLoadingText="Resetting password"
-                onPress={handleSubmit}
-              >
-                Reset Password
-              </Button>
+              <ScrollView>
+                <FormControl>
+                  <FormControl.Label>National ID</FormControl.Label>
+                  <Input
+                    placeholder="12345678"
+                    placeholderTextColor="#707070"
+                    value={formData.nationalID}
+                    onChangeText={(value) =>
+                      setFormData({ ...formData, nationalID: value })
+                    }
+                    borderWidth={1}
+                    borderColor={"gray.400"}
+                  />
+                </FormControl>
+                <FormControl>
+                  <FormControl.Label>Password</FormControl.Label>
+                  <Input
+                    type={show ? "text" : "password"}
+                    keyboardType="numeric"
+                    value={formData.pin}
+                    onChangeText={(value) =>
+                      setFormData({ ...formData, pin: value })
+                    }
+                    borderWidth={1}
+                    borderColor={"gray.400"}
+                    InputRightElement={
+                      <Pressable onPress={() => setShow(!show)}>
+                        <Icon
+                          as={
+                            <MaterialIcons
+                              name={show ? "visibility" : "visibility-off"}
+                            />
+                          }
+                          size={5}
+                          mr={2}
+                          color={"gray.600"}
+                        />
+                      </Pressable>
+                    }
+                  />
+                  {"pin" in errors ? (
+                    <FormControl.ErrorMessage>
+                      {errors.pin}
+                    </FormControl.ErrorMessage>
+                  ) : (
+                    ""
+                  )}
+                </FormControl>
+                <FormControl>
+                  <FormControl.Label>Confirm Password</FormControl.Label>
+                  <Input
+                    type={show ? "text" : "password"}
+                    keyboardType="numeric"
+                    value={formData.pin}
+                    onChangeText={(value) =>
+                      setFormData({ ...formData, confirmPin: value })
+                    }
+                    borderWidth={1}
+                    borderColor={"gray.400"}
+                    InputRightElement={
+                      <Pressable onPress={() => setShow(!show)}>
+                        <Icon
+                          as={
+                            <MaterialIcons
+                              name={show ? "visibility" : "visibility-off"}
+                            />
+                          }
+                          size={5}
+                          mr={2}
+                          color={"gray.600"}
+                        />
+                      </Pressable>
+                    }
+                  />
+                  {"confirmPin" in errors ? (
+                    <FormControl.ErrorMessage>
+                      {errors.confirmPin}
+                    </FormControl.ErrorMessage>
+                  ) : (
+                    ""
+                  )}
+                </FormControl>
+                <Button
+                  mt={"7"}
+                  bg={colors.phAMACoreColor3}
+                  p={4}
+                  _text={{
+                    fontSize: 14,
+                    fontWeight: "semibold",
+                    color: "white",
+                  }}
+                  isLoading={isLoading}
+                  isLoadingText="Resetting password"
+                  onPress={handleSubmit}
+                >
+                  Reset Password
+                </Button>
+              </ScrollView>
             </VStack>
           </Box>
         </Center>
