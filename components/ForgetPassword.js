@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import React, { useState } from "react";
 import { Platform, ToastAndroid } from "react-native";
 import colors from "../config/colors";
 import {
@@ -26,48 +26,46 @@ import { MaterialIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function ForgetPassword({ navigation }) {
-  const [isLoading, setIsLoading] = useState(false); //Loading state of action button (Reset Password)
+  const [isLoading, setIsLoading] = useState(false); // Loading state of action button (Reset Password)
   const [formData, setFormData] = useState({
     nationalID: "200011233",
     pin: "",
     confirmPin: "",
-  }); //State displaying data inputs (creating new user) - key and object
-  const [show, setShow] = useState(false); //State to show or hide input text and visibility
-  const [error, setError] = useState(""); //State to display an error when logging in
-  const [errors, setErrors] = useState({}); //Display errors in validation incase of missing inputs
+  }); // State displaying data inputs (creating new user) - key and object
+  const [show, setShow] = useState(false); // State to show or hide input text and visibility
+  const [error, setError] = useState(""); // State to display an error when logging in
+  const [errors, setErrors] = useState({}); // Display errors in validation in case of missing or wrong inputs
 
   const validate = () => {
     if (!formData.nationalID && !formData.pin && !formData.confirmPin) {
       setErrors({
-        ...errors,
         nationalID: "National ID is required",
         pin: "Pin is required",
         confirmPin: "Confirm Pin is required",
       });
       return false;
     } else if (!formData.nationalID) {
-      setErrors({ ...errors, nationalID: "National ID is required" });
+      setErrors({ nationalID: "National ID is required" });
       return false;
     } else if (!formData.pin) {
-      setErrors({ ...errors, pin: "Pin is required" });
+      setErrors({ pin: "Pin is required" });
       return false;
-    } else if (!formData.pin) {
-      setErrors({ ...errors, pin: "Confirm Pin is required" });
+    } else if (!formData.confirmPin) {
+      setErrors({ confirmPin: "Confirm Pin is required" });
       return false;
     }
-    setErrors({ ...errors, nationalID: "200011233", pin: "" });
+    setErrors({ nationalID: "200011233", pin: "", confirmPin: "" });
     return true;
   };
 
   const passwordsMatch = () => {
     if (formData.pin !== formData.confirmPin) {
       setErrors({
-        ...errors,
         confirmPin: "New Pin and Confirm Pin do not match",
       });
       return false;
     }
-    setErrors({ ...errors, confirmPin: "" });
+    setErrors({ confirmPin: "" });
     return true;
   };
 
@@ -78,11 +76,10 @@ export default function ForgetPassword({ navigation }) {
       let response = await fetch(
         `http://www.phamacoretraining.co.ke:81/CustomerPoints/CustomerLogin`,
         {
-          method: "POST", // *GET, POST, PUT, DELETE, etc.
+          method: "POST",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            // 'Access-Control-Allow-Origin': '*',
           },
           body: JSON.stringify({
             idnumber: formData.nationalID,
@@ -106,13 +103,11 @@ export default function ForgetPassword({ navigation }) {
         console.log(data);
         setIsLoading(false);
         setError(data.errors.message);
-        // alert(data.errors.message);
       }
     } catch (error) {
       console.log(error);
       setIsLoading(false);
       alert("Error logging in. Check your credentials!");
-      // ADD THIS THROW error
       throw new Error(error);
     }
   };
@@ -226,7 +221,7 @@ export default function ForgetPassword({ navigation }) {
                   <Input
                     type={show ? "text" : "password"}
                     keyboardType="numeric"
-                    value={formData.pin}
+                    value={formData.confirmPin}
                     onChangeText={(value) =>
                       setFormData({ ...formData, confirmPin: value })
                     }
