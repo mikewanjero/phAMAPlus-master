@@ -19,6 +19,7 @@ import {
   Image,
   Alert,
   useToast,
+  ScrollView,
 } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -29,10 +30,12 @@ function Profile({ navigation }) {
     nationalID: "",
     currentPin: "",
     newPin: "",
+    confirmNewPin: "",
   });
   const [errors, setErrors] = useState({
     currentPin: "",
     newPin: "",
+    confirmNewPin: "",
   });
 
   const [show, setShow] = useState(false);
@@ -41,11 +44,12 @@ function Profile({ navigation }) {
   const [error, setError] = useState("");
 
   const validate = () => {
-    if (!formData.currentPin && !formData.newPin) {
+    if (!formData.currentPin && !formData.newPin && !formData.confirmNewPin) {
       setErrors({
         ...errors,
         currentPin: "Current Pin is required",
         newPin: "New Pin is required",
+        confirmNewPin: "Confirm New Pin is required",
       });
       return false;
     } else if (!formData.currentPin) {
@@ -54,8 +58,23 @@ function Profile({ navigation }) {
     } else if (!formData.newPin) {
       setErrors({ ...errors, newPin: "New Pin is required" });
       return false;
+    } else if (!formData.confirmNewPin) {
+      setErrors({ ...errors, confirmNewPin: "Confirm New Pin is required" });
+      return false;
     }
-    setErrors({ ...errors, currentPin: "", newPin: "" });
+    setErrors({ ...errors, currentPin: "", newPin: "", confirmNewPin: "" });
+    return true;
+  };
+
+  const passwordsMatch = () => {
+    if (formData.newPin !== formData.confirmNewPin) {
+      setErrors({
+        ...errors,
+        confirmNewPin: "New Pin and Confirm New Pin do not match",
+      });
+      return false;
+    }
+    setErrors({ ...errors, confirmNewPin: "" });
     return true;
   };
 
@@ -66,7 +85,7 @@ function Profile({ navigation }) {
       let response = await fetch(
         `http://www.phamacoretraining.co.ke:81/CustomerPoints/UpdatePassword/${memberNumber}`,
         {
-          method: "UPDATE",
+          method: "POST",
           headers: {
             Accept: "application/json",
             "Content-type": "application/json",
@@ -74,7 +93,8 @@ function Profile({ navigation }) {
           body: JSON.stringify({
             nationalID: formData.nationalID,
             currentPin: formData.currentPin,
-            newPin: formData.newPin,
+            // newPin: formData.newPin,
+            // confirmNewPin: formData.confirmNewPin,
           }),
         }
       );
@@ -100,10 +120,10 @@ function Profile({ navigation }) {
   };
 
   const handleSubmit = () => {
-    validate()
+    validate() && passwordsMatch()
       ? handleUpdate()
       : ToastAndroid.showWithGravityAndOffset(
-          "Fill in the blanks!",
+          "Fill in the blanks correctly!",
           ToastAndroid.LONG,
           ToastAndroid.BOTTOM,
           25,
@@ -188,116 +208,151 @@ function Profile({ navigation }) {
             </Heading>
 
             <VStack space={3} mt="5">
-              <FormControl>
-                <FormControl.Label>User Name</FormControl.Label>
-                <Input
-                  type={"text"}
-                  value={userName}
-                  onChangeText={(value) => setUserName(value)}
-                  isReadOnly
-                  borderWidth="1"
-                  borderColor={"gray.400"}
-                />
-              </FormControl>
-              <FormControl isRequired isInvalid={"currentPin" in errors}>
-                <FormControl.Label>Current Pin</FormControl.Label>
-                <Input
-                  type={show ? "text" : "password"}
-                  keyboardType="numeric"
-                  onChangeText={(value) =>
-                    setFormData({ ...formData, currentPin: value })
-                  }
-                  borderWidth="1"
-                  borderColor={"gray.400"}
-                  InputRightElement={
-                    <Pressable onPress={() => setShow(!show)}>
-                      <Icon
-                        as={
-                          <MaterialIcons
-                            name={show ? "visibility" : "visibility-off"}
-                          />
-                        }
-                        size={5}
-                        mr="2"
-                        color="muted.400"
-                      />
-                    </Pressable>
-                  }
-                />
-                {"currentPin" in errors ? (
-                  <FormControl.ErrorMessage>
-                    {errors.currentPin}
-                  </FormControl.ErrorMessage>
-                ) : (
-                  ""
-                )}
-              </FormControl>
-              <FormControl isRequired isInvalid={"newPin" in errors}>
-                <FormControl.Label>New Pin</FormControl.Label>
-                <Input
-                  type={show ? "text" : "password"}
-                  keyboardType="numeric"
-                  onChangeText={(value) =>
-                    setFormData({ ...formData, newPin: value })
-                  }
-                  borderWidth="1"
-                  borderColor={"gray.400"}
-                  InputRightElement={
-                    <Pressable onPress={() => setShow(!show)}>
-                      <Icon
-                        as={
-                          <MaterialIcons
-                            name={show ? "visibility" : "visibility-off"}
-                          />
-                        }
-                        size={5}
-                        mr="2"
-                        color="muted.400"
-                      />
-                    </Pressable>
-                  }
-                />
-                {"newPin" in errors ? (
-                  <FormControl.ErrorMessage>
-                    {errors.newPin}
-                  </FormControl.ErrorMessage>
-                ) : (
-                  ""
-                )}
-              </FormControl>
+              <ScrollView>
+                <FormControl>
+                  <FormControl.Label>User Name</FormControl.Label>
+                  <Input
+                    type={"text"}
+                    value={userName}
+                    onChangeText={(value) => setUserName(value)}
+                    isReadOnly
+                    borderWidth="1"
+                    borderColor={"gray.400"}
+                  />
+                </FormControl>
+                <FormControl isRequired isInvalid={"currentPin" in errors}>
+                  <FormControl.Label>Current Pin</FormControl.Label>
+                  <Input
+                    type={show ? "text" : "password"}
+                    keyboardType="numeric"
+                    onChangeText={(value) =>
+                      setFormData({ ...formData, currentPin: value })
+                    }
+                    borderWidth="1"
+                    borderColor={"gray.400"}
+                    InputRightElement={
+                      <Pressable onPress={() => setShow(!show)}>
+                        <Icon
+                          as={
+                            <MaterialIcons
+                              name={show ? "visibility" : "visibility-off"}
+                            />
+                          }
+                          size={5}
+                          mr="2"
+                          color="muted.400"
+                        />
+                      </Pressable>
+                    }
+                  />
+                  {"currentPin" in errors ? (
+                    <FormControl.ErrorMessage>
+                      {errors.currentPin}
+                    </FormControl.ErrorMessage>
+                  ) : (
+                    ""
+                  )}
+                </FormControl>
+                <FormControl isRequired isInvalid={"newPin" in errors}>
+                  <FormControl.Label>New Pin</FormControl.Label>
+                  <Input
+                    type={show ? "text" : "password"}
+                    keyboardType="numeric"
+                    onChangeText={(value) =>
+                      setFormData({ ...formData, newPin: value })
+                    }
+                    borderWidth="1"
+                    borderColor={"gray.400"}
+                    InputRightElement={
+                      <Pressable onPress={() => setShow(!show)}>
+                        <Icon
+                          as={
+                            <MaterialIcons
+                              name={show ? "visibility" : "visibility-off"}
+                            />
+                          }
+                          size={5}
+                          mr="2"
+                          color="muted.400"
+                        />
+                      </Pressable>
+                    }
+                  />
+                  {"newPin" in errors ? (
+                    <FormControl.ErrorMessage>
+                      {errors.newPin}
+                    </FormControl.ErrorMessage>
+                  ) : (
+                    ""
+                  )}
+                </FormControl>
+                <FormControl isRequired isInvalid={"confirmNewPin" in errors}>
+                  <FormControl.Label>Confirm New Pin</FormControl.Label>
+                  <Input
+                    type={show ? "text" : "password"}
+                    keyboardType="numeric"
+                    onChangeText={(value) =>
+                      setFormData({ ...formData, confirmNewPin: value })
+                    }
+                    borderWidth="1"
+                    borderColor={"gray.400"}
+                    InputRightElement={
+                      <Pressable onPress={() => setShow(!show)}>
+                        <Icon
+                          as={
+                            <MaterialIcons
+                              name={show ? "visibility" : "visibility-off"}
+                            />
+                          }
+                          size={5}
+                          mr="2"
+                          color="muted.400"
+                        />
+                      </Pressable>
+                    }
+                  />
+                  {"confirmNewPin" in errors ? (
+                    <FormControl.ErrorMessage>
+                      {errors.confirmNewPin}
+                    </FormControl.ErrorMessage>
+                  ) : (
+                    ""
+                  )}
+                </FormControl>
 
-              <Button
-                mt="2"
-                bg={Colors.phAMACoreColor2}
-                // colorScheme="indigo"
-                _text={{
-                  fontSize: "md",
-                  fontWeight: "500",
-                  color: "white",
-                }}
-                p={4}
-                isLoading={isLoading}
-                isLoadingText="Submitting"
-                onPress={handleSubmit}
-              >
-                Update
-              </Button>
-              <Button
-                mt="2"
-                bg={"coolGray.400"}
-                // colorScheme="indigo"
-                _text={{
-                  fontSize: "md",
-                  fontWeight: "500",
-                  color: "white",
-                }}
-                p={4}
-                isLoading={isLoading}
-                isLoadingText="Submitting"
-                onPress={clearAll}
-              >
-                Log Out
-              </Button>
+                <Button
+                  mt="2"
+                  bg={Colors.phAMACoreColor2}
+                  // colorScheme="indigo"
+                  _text={{
+                    fontSize: "md",
+                    fontWeight: "500",
+                    color: "white",
+                  }}
+                  p={4}
+                  isLoading={isLoading}
+                  isLoadingText="Submitting"
+                  onPress={handleSubmit}
+                >
+                  Update
+                </Button>
+                <Button
+                  mt="2"
+                  bg={"coolGray.400"}
+                  // colorScheme="indigo"
+                  _text={{
+                    fontSize: "md",
+                    fontWeight: "500",
+                    color: "white",
+                  }}
+                  p={4}
+                  isLoading={isLoading}
+                  isLoadingText="Submitting"
+                  onPress={clearAll}
+                >
+                  Log Out
+                </Button>
+              </ScrollView>
             </VStack>
           </Box>
         </Center>
