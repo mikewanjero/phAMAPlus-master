@@ -35,13 +35,13 @@ function Login({ navigation }) {
   const toast = useToast();
 
   // 200011233
-  // 1080
+  // 1940
 
   const [error, setError] = useState("");
 
   const [formData, setFormData] = useState({
     nationalID: "200011233",
-    pin: "1080",
+    pin: "1940",
   });
   const [errors, setErrors] = useState({
     // nationalID: "",
@@ -94,10 +94,6 @@ function Login({ navigation }) {
         let data = await response.json();
         console.log(data);
         setIsLoading(false);
-        // setFormData({
-        //   nationalID: "",
-        //   pin: "",
-        // });
         await AsyncStorage.setItem("token", data.token);
         await AsyncStorage.setItem("memberno", data.user.memberno);
         await AsyncStorage.setItem("fullusername", data.user.fullusername);
