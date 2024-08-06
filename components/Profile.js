@@ -81,41 +81,40 @@ function Profile({ navigation }) {
   const handleUpdate = async () => {
     setIsLoading(true);
     setError("");
-    try {
-      let response = await fetch(
-        `http://www.phamacoretraining.co.ke:81/CustomerPoints/UpdatePassword/${memberNumber}`,
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify({
-            nationalID: formData.nationalID,
-            currentPin: formData.currentPin,
-            // newPin: formData.newPin,
-            // confirmNewPin: formData.confirmNewPin,
-          }),
+    const memberno = await AsyncStorage.getItem("memberno");
+    if (memberno) {
+      try {
+        const response = await fetch(
+          `http://www.phamacoretraining.co.ke:81/CustomerPoints/UpdatePassword/${memberno}`,
+          {
+            method: "POST",
+            body: JSON.stringify({
+              currentPin: formData.currentPin,
+              newPin: formData.newPin,
+            }),
+            headers: {
+              Accept: "application/json",
+              "Content-type": "application/json",
+            },
+          }
+        );
+        if (response.ok) {
+          let data = await response.json();
+          console.log(data);
+          setIsLoading(false);
+        } else {
+          let data = await response.json();
+          console.log(data);
+          setIsLoading(false);
         }
-      );
-      if (response.ok) {
-        let data = response.json();
-        console.log(data);
+      } catch (error) {
+        console.error();
+        setError("Error changing password!");
         setIsLoading(false);
-        await AsyncStorage.setItem("token", data.token);
-        await AsyncStorage.setItem("memberno", data.user.memberno);
-        await AsyncStorage.setItem("fullusername", data.user.fullusername);
-      } else {
-        let data = response.json();
-        console.log(data);
-        setIsLoading(false);
-        setError(data.errors.message);
+        throw new Error(error);
       }
-    } catch (error) {
-      console.log(error);
-      setIsLoading(false);
-      alert("Error logging in!");
-      throw new Error(error);
+    } else {
+      alert("Member not available.");
     }
   };
 
