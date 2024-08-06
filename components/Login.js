@@ -35,13 +35,13 @@ function Login({ navigation }) {
   const toast = useToast();
 
   // 200011233
-  // 1940
+  // 1936
 
   const [error, setError] = useState("");
 
   const [formData, setFormData] = useState({
     nationalID: "200011233",
-    pin: "1940",
+    pin: "1936",
   });
   const [errors, setErrors] = useState({
     // nationalID: "",
