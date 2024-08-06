@@ -74,7 +74,7 @@ export default function ForgetPassword({ navigation }) {
     setError("");
     try {
       let response = await fetch(
-        `http://www.phamacoretraining.co.ke:81/CustomerPoints/CustomerLogin`,
+        `http://www.phamacoretraining.co.ke:81/CustomerPoints/ForgotPassword`,
         {
           method: "POST",
           headers: {
