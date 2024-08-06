@@ -14,8 +14,6 @@ import {
   HStack,
   Heading,
   Center,
-  Avatar,
-  Alert,
   Text,
   VStack,
   Divider,
@@ -30,7 +28,7 @@ import Data from "../data.json";
 import Colors from "../config/colors";
 
 function Dashboard({ navigation }) {
-  const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState({});
   const [transactions, setTransactions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
@@ -53,8 +51,6 @@ function Dashboard({ navigation }) {
 
   const handleTransactions = async () => {
     setIsLoading(true);
-    // let token = await SecureStore.getItemAsync("token");
-    // let memberno = await SecureStore.getItemAsync("memberno");
     let token = await AsyncStorage.getItem("token");
     let memberno = await AsyncStorage.getItem("memberno");
     if (token && memberno) {
@@ -79,7 +75,7 @@ function Dashboard({ navigation }) {
             const data = await response.json();
             setIsLoading(false);
             alert(data.errors.message);
-            return console.log(data);
+            // return console.log(data);
           }
         })
         .catch((error) => {
@@ -95,8 +91,6 @@ function Dashboard({ navigation }) {
   };
   const handleDashboard = async () => {
     setIsLoading(true);
-    // let token = await SecureStore.getItemAsync("token");
-    // let memberno = await SecureStore.getItemAsync("memberno");
     let token = await AsyncStorage.getItem("token");
     let memberno = await AsyncStorage.getItem("memberno");
     let fullusername = await AsyncStorage.getItem("fullusername");
@@ -122,7 +116,7 @@ function Dashboard({ navigation }) {
             const data = await response.json();
             setIsLoading(false);
             setUserData(data[0]);
-            console.log(data);
+            // console.log(data);
             handleTransactions();
           } else {
             const data = await response.json();
@@ -149,7 +143,7 @@ function Dashboard({ navigation }) {
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
     handleDashboard();
-    handleTransactions();
+    // handleTransactions();
     wait(2000).then(() => setRefreshing(false));
   }, []);
 
@@ -202,7 +196,7 @@ function Dashboard({ navigation }) {
                   // color={Colors.phAMACoreColor2}
                   color="white"
                 >
-                  {userData.mempOintSBAL} pts
+                  {userData.mempOintSBAL ?? 0} pts
                 </Text>
                 {/* <HStack
                   alignItems="center"
@@ -274,7 +268,7 @@ function Dashboard({ navigation }) {
                   </Text>
 
                   <Text mx={"auto"} fontWeight={"bold"} color={Colors.success}>
-                    {userData.mempOintSBAL} pts
+                    {userData.mempOintSBAL ?? 0} pts
                   </Text>
                 </VStack>
 
@@ -288,7 +282,7 @@ function Dashboard({ navigation }) {
                     fontWeight={"bold"}
                     color={Colors.phAMACoreColor1}
                   >
-                    {userData.mempOintSBUY} pts
+                    {userData.mempOintSBUY ?? 0} pts
                   </Text>
                 </VStack>
 
@@ -298,7 +292,7 @@ function Dashboard({ navigation }) {
                     Redeemed
                   </Text>
                   <Text mx={"auto"} fontWeight={"bold"} color={Colors.danger}>
-                    {userData.mempOintSREDEEM} pts
+                    {userData.mempOintSREDEEM ?? 0} pts
                   </Text>
                 </VStack>
               </Flex>
