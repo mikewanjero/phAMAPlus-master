@@ -24,7 +24,6 @@ import {
 } from "native-base";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Data from "../data.json";
-
 import Colors from "../config/colors";
 
 function Dashboard({ navigation }) {
@@ -66,13 +65,14 @@ function Dashboard({ navigation }) {
         }
       )
         .then(async (response) => {
+          const data = await response.json();
           if (response.ok) {
-            const data = await response.json();
+            // const data = await response.json();
             setIsLoading(false);
             setTransactions(data.slice(0, 5));
             console.log(data);
           } else {
-            const data = await response.json();
+            // const data = await response.json();
             setIsLoading(false);
             alert(data.errors.message);
             // return console.log(data);
@@ -119,7 +119,7 @@ function Dashboard({ navigation }) {
             // console.log(data);
             handleTransactions();
           } else {
-            const data = await response.json();
+            // const data = await response.json();
             setIsLoading(false);
             return console.log(data);
           }
@@ -307,8 +307,8 @@ function Dashboard({ navigation }) {
                 <Center flex={1}>
                   <ActivityIndicator size="large" color="#0000ff" />
                 </Center>
-              ) : Data.Transactions ? (
-                Data.Transactions?.map((transaction, index) => (
+              ) : transactions ? (
+                transactions?.map((transaction, index) => (
                   <Link
                     onPress={() =>
                       navigation.navigate("transactionDetails", {
@@ -403,16 +403,9 @@ function Dashboard({ navigation }) {
                   </Link>
                 ))
               ) : (
-                <Text
-                  color="coolGray.600"
-                  _dark={{
-                    color: "warmGray.200",
-                  }}
-                  fontWeight="500"
-                  fontSize="xs"
-                >
-                  No Transaction History
-                </Text>
+                <Center flex={1}>
+                  <Text>No Transactions Found</Text>
+                </Center>
               )}
             </ScrollView>
           </View>
