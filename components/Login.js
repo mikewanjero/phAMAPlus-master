@@ -90,8 +90,12 @@ function Login({ navigation }) {
           }),
         }
       );
+
+      // const responseText = await response.text();
+      // console.log("Response Text: ", responseText);
+
+      const data = await response.json();
       if (response.ok) {
-        let data = await response.json();
         console.log(data);
         setIsLoading(false);
         await AsyncStorage.setItem("token", data.token);
@@ -100,7 +104,6 @@ function Login({ navigation }) {
 
         return navigation.navigate("Dashboard");
       } else {
-        let data = await response.json();
         console.log(data);
         setIsLoading(false);
         setError(data.errors.message);
@@ -114,73 +117,7 @@ function Login({ navigation }) {
       throw new Error(error);
     }
   };
-  // const handleLogin = async () => {
-  //   setIsLoading(true);
-  //   return fetch(
-  //     `http://www.phamacoretraining.co.ke:81/Auth//CustomerPoints/CustomerLogin`,
-  //     {
-  //       method: "POST", // GET, POST, PUT, DELETE, etc.
-  //       headers: {
-  //         Accept: "application/json",
-  //         "Content-Type": "application/json; charset=utf-8",
-  //         // Authorization: `Bearer adas`,
-  //       },
-  //       body: JSON.stringify({
-  //         idnumber: formData.nationalID,
-  //         pin: formData.pin,
-  //       }),
-  //     }
-  //   )
-  //     .then(async (response) => {
-  //       if (response.ok) {
-  //         const data = await response.json();
-  //         setIsLoading(false);
-  //         setFormData({
-  //           nationalID: "",
-  //           pin: "",
-  //         });
-  //         await AsyncStorage.setItem("token", data.token);
-  //         await AsyncStorage.setItem("memberno", data.user.memberno);
-  //         await AsyncStorage.setItem("fullusername", data.user.fullusername);
-  //         console.log(data);
 
-  //         return navigation.navigate("Dashboard");
-  //       } else {
-  //         const data = await response.json();
-  //         setIsLoading(false);
-  //         alert(data.errors.message);
-  //         // <Alert w="100%" status={"error"}>
-  //         //   <VStack space={2} flexShrink={1} w="100%">
-  //         //     <HStack flexShrink={1} space={2} justifyContent="space-between">
-  //         //       <HStack space={2} flexShrink={1}>
-  //         //         <Alert.Icon mt="1" />
-  //         //         <Text fontSize="md" color="coolGray.800">
-  //         //           {data.errors.message}
-  //         //         </Text>
-  //         //       </HStack>
-  //         //     </HStack>
-  //         //   </VStack>
-  //         // </Alert>;
-  //         // Snackbar.show({
-  //         //   text: "Hello world",
-  //         //   duration: Snackbar.LENGTH_SHORT,
-  //         // });
-
-  //         // Alert(data.errors.message);
-  //         return console.log(data.errors.message);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       setIsLoading(false);
-  //       console.log("Catch", error.message);
-  //       alert("Check your internet connection!");
-  //       // ADD THIS THROW error
-  //       throw new Error(error);
-  //     });
-  // };
-  /**
-   * TODO: Handle Submit form
-   */
   const handleSubmit = () => {
     validate()
       ? handleLogin()
