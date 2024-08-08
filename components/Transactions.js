@@ -18,8 +18,8 @@ import {
   Link,
 } from "native-base";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Data from "../data.json";
 import Colors from "../config/colors";
+// import Data from "../data.json";
 
 function Transactions({ navigation }) {
   const [transactions, setTransactions] = useState([]);
@@ -91,7 +91,7 @@ function Transactions({ navigation }) {
           <Center flex={1}>
             <ActivityIndicator size="large" color="#0000ff" />
           </Center>
-        ) : Data.Transactions.length > 0 ? (
+        ) : transactions.length > 0 ? (
           <ScrollView
             // bg="indigo.200"
             px={3}
@@ -99,7 +99,7 @@ function Transactions({ navigation }) {
               <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
             }
           >
-            {Data.Transactions.map((transaction, index) => (
+            {transactions.map((transaction, index) => (
               <Link
                 onPress={() =>
                   navigation.navigate("transactionDetails", {
