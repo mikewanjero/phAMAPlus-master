@@ -23,7 +23,6 @@ import {
   Icon,
   Image,
   Alert,
-  useToast,
 } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 // import * as SecureStore from "expo-secure-store";
@@ -32,16 +31,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 // import { API_URL } from "@env";
 
 function Login({ navigation }) {
-  const toast = useToast();
-
-  // 200011233
-  // 1602
-
   const [error, setError] = useState("");
 
   const [formData, setFormData] = useState({
     nationalID: "200011233",
-    pin: "1602",
+    pin: "1111",
+    // pin: "1602",
   });
   const [errors, setErrors] = useState({
     // nationalID: "",
@@ -102,7 +97,10 @@ function Login({ navigation }) {
         await AsyncStorage.setItem("memberno", data.user.memberno);
         await AsyncStorage.setItem("fullusername", data.user.fullusername);
 
-        return navigation.navigate("Dashboard");
+        return navigation.reset({
+          index: 0,
+          routes: [{ name: "Dashboard" }],
+        });
       } else {
         console.log(data);
         setIsLoading(false);
@@ -112,7 +110,7 @@ function Login({ navigation }) {
     } catch (error) {
       console.log(error);
       setIsLoading(false);
-      alert("Error logging in. Check your credentials!");
+      setError("An error occured processing your current request!");
       // ADD THIS THROW error
       throw new Error(error);
     }
@@ -262,7 +260,7 @@ function Login({ navigation }) {
               </FormControl>
               <Button
                 mt="2"
-                bg={Colors.phAMACoreColor3}
+                bg={Colors.phAMACoreColor2}
                 // colorScheme="indigo"
                 _text={{
                   fontSize: "md",

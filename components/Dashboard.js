@@ -23,7 +23,6 @@ import {
   Link,
 } from "native-base";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Data from "../data.json";
 import Colors from "../config/colors";
 
 function Dashboard({ navigation }) {
@@ -31,7 +30,6 @@ function Dashboard({ navigation }) {
   const [transactions, setTransactions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
-  const [username, setUsername] = useState("");
   // PPL000101
 
   useFocusEffect(
@@ -93,15 +91,9 @@ function Dashboard({ navigation }) {
     setIsLoading(true);
     let token = await AsyncStorage.getItem("token");
     let memberno = await AsyncStorage.getItem("memberno");
-    let fullusername = await AsyncStorage.getItem("fullusername");
-    if (fullusername) {
-      setUsername(fullusername);
-    } else {
-      alert("No values stored under that key.");
-    }
     if (token && memberno) {
       return fetch(
-        `http://www.phamacoretraining.co.ke:81/Customers/membersDetails?memberNum=${memberno}`,
+        `http://www.phamacoretraining.co.ke:81/Customers/members?memberNum=${memberno}&numberOfcustomers=1`,
         {
           method: "GET", // GET, POST, PUT, DELETE, etc.
           headers: {
@@ -116,7 +108,6 @@ function Dashboard({ navigation }) {
           if (response.ok) {
             setIsLoading(false);
             setUserData(data[0]);
-            handleTransactions();
             console.log(data);
           } else {
             // const data = await response.json();
@@ -149,6 +140,7 @@ function Dashboard({ navigation }) {
 
   useEffect(() => {
     handleDashboard();
+    handleTransactions();
   }, []);
 
   return (
@@ -162,10 +154,10 @@ function Dashboard({ navigation }) {
         <View flex={1} bg="coolGray.100">
           <Box px="2" py="1">
             <VStack>
-              <Text fontSize={"2xs"}> Welcome back, {username}</Text>
+              <Text fontSize={"sm"}> Welcome back,</Text>
               <Text
                 fontWeight={"semibold"}
-                fontSize={"xs"}
+                fontSize={"lg"}
                 color={Colors.phAMACoreColor1}
               >
                 {userData?.membername}

@@ -41,7 +41,10 @@ function Profile({ navigation }) {
   const [show, setShow] = useState(false);
   const [userName, setUserName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [status, setStatus] = useState({
+    error: "",
+    success: "",
+  });
 
   const validate = () => {
     if (!formData.currentPin && !formData.newPin && !formData.confirmNewPin) {
@@ -80,7 +83,11 @@ function Profile({ navigation }) {
 
   const handleUpdate = async () => {
     setIsLoading(true);
-    setError("");
+    setStatus({
+      error: "",
+      success: "",
+    });
+    const token = await AsyncStorage.getItem("token");
     const memberno = await AsyncStorage.getItem("memberno");
     if (memberno) {
       try {
@@ -93,28 +100,49 @@ function Profile({ navigation }) {
               newPin: formData.newPin,
             }),
             headers: {
-              Accept: "application/json",
-              "Content-type": "application/json",
+              Accept: "*/*",
+              "Content-Type": "application/json; charset=utf-8",
+              Authorization: `Bearer ${token}`,
             },
           }
         );
         if (response.ok) {
           let data = await response.json();
           console.log(data);
+          setFormData({
+            nationalID: "",
+            currentPin: "",
+            newPin: "",
+            confirmNewPin: "",
+          });
+          setStatus({
+            error: "",
+            success: data?.message,
+          });
           setIsLoading(false);
+          clearAll();
         } else {
           let data = await response.json();
           console.log(data);
           setIsLoading(false);
+          setStatus({
+            error: data.errors.message,
+            success: "",
+          });
         }
       } catch (error) {
-        console.error();
-        setError("Error changing password!");
+        setStatus({
+          error: "An error occured processing your current request!",
+          success: "",
+        });
         setIsLoading(false);
         throw new Error(error);
       }
     } else {
-      alert("Member not available.");
+      setStatus({
+        error: "Error getting member information!",
+        success: "",
+      });
     }
   };
 
@@ -145,7 +173,11 @@ function Profile({ navigation }) {
     } catch (e) {
       console.error("Something went wrong on fetching", e);
     }
-    return navigation.navigate("Login");
+    // return navigation.navigate("Login");
+    return navigation.reset({
+      index: 0,
+      routes: [{ name: "Login" }],
+    });
   };
 
   useEffect(() => {
@@ -169,19 +201,47 @@ function Profile({ navigation }) {
             <Avatar bg="blueGray.600" size="xl">
               {userName ? userName.match(/\b([A-Z])/g).join("") : null}
             </Avatar>
-            {/* <Heading
+            <Heading
               size="lg"
               fontWeight="900"
-              color={Colors.phAMACoreColor3}
+              mt={2}
+              color={Colors.phAMACoreColor2}
               _dark={{
                 color: "warmGray.50",
               }}
             >
               {userName}
-            </Heading> */}
+            </Heading>
           </Center>
         </View>
         {/*  w="100%" */}
+        {status.error && (
+          <Alert w="100%" status="error">
+            <Text
+              fontSize="md"
+              fontWeight="medium"
+              _dark={{
+                color: "coolGray.800",
+              }}
+            >
+              {status.error}
+            </Text>
+          </Alert>
+        )}
+        {status.success && (
+          <Alert w="100%" status="success">
+            <Text
+              fontSize="md"
+              fontWeight="medium"
+              _dark={{
+                color: "coolGray.800",
+              }}
+            >
+              {status.success}
+            </Text>
+          </Alert>
+        )}
+
         <Center px="5" flex={3} bg="coolGray.200">
           <Box p="2" w="100%" flex={1}>
             <Heading
@@ -208,7 +268,7 @@ function Profile({ navigation }) {
 
             <VStack space={3} mt="5">
               <ScrollView>
-                <FormControl>
+                {/* <FormControl>
                   <FormControl.Label>User Name</FormControl.Label>
                   <Input
                     type={"text"}
@@ -218,7 +278,7 @@ function Profile({ navigation }) {
                     borderWidth="1"
                     borderColor={"gray.400"}
                   />
-                </FormControl>
+                </FormControl> */}
                 <FormControl isRequired isInvalid={"currentPin" in errors}>
                   <FormControl.Label>Current Pin</FormControl.Label>
                   <Input
@@ -252,6 +312,7 @@ function Profile({ navigation }) {
                     ""
                   )}
                 </FormControl>
+
                 <FormControl isRequired isInvalid={"newPin" in errors}>
                   <FormControl.Label>New Pin</FormControl.Label>
                   <Input
@@ -277,12 +338,10 @@ function Profile({ navigation }) {
                       </Pressable>
                     }
                   />
-                  {"newPin" in errors ? (
+                  {"newPin" in errors && (
                     <FormControl.ErrorMessage>
                       {errors.newPin}
                     </FormControl.ErrorMessage>
-                  ) : (
-                    ""
                   )}
                 </FormControl>
                 <FormControl isRequired isInvalid={"confirmNewPin" in errors}>
@@ -310,12 +369,10 @@ function Profile({ navigation }) {
                       </Pressable>
                     }
                   />
-                  {"confirmNewPin" in errors ? (
+                  {"confirmNewPin" in errors && (
                     <FormControl.ErrorMessage>
                       {errors.confirmNewPin}
                     </FormControl.ErrorMessage>
-                  ) : (
-                    ""
                   )}
                 </FormControl>
 

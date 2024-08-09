@@ -182,7 +182,7 @@ export default function ForgetPassword({ navigation }) {
                     borderColor={"gray.400"}
                   />
                 </FormControl>
-                <FormControl>
+                {/* <FormControl>
                   <FormControl.Label>Password</FormControl.Label>
                   <Input
                     type={show ? "text" : "password"}
@@ -249,10 +249,10 @@ export default function ForgetPassword({ navigation }) {
                   ) : (
                     ""
                   )}
-                </FormControl>
+                </FormControl> */}
                 <Button
                   mt={"7"}
-                  bg={colors.phAMACoreColor3}
+                  bg={colors.phAMACoreColor2}
                   p={4}
                   _text={{
                     fontSize: 14,
