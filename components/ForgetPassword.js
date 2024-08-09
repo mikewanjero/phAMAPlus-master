@@ -81,6 +81,9 @@ export default function ForgetPassword({ navigation }) {
             Accept: "application/json",
             "Content-Type": "application/json",
           },
+          body: JSON.stringify({
+            idnumber: formData.nationalID,
+          }),
         }
       );
       if (response.ok) {
