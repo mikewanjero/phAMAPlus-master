@@ -83,8 +83,6 @@ export default function ForgetPassword({ navigation }) {
           },
           body: JSON.stringify({
             idnumber: formData.nationalID,
-            pin: formData.pin,
-            confirmPin: formData.confirmPin,
           }),
         }
       );
