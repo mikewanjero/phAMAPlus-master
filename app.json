@@ -17,7 +17,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/pcico.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.netiapaul.phAMACore_App"
@@ -25,7 +25,18 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": ["expo-secure-store"],
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          }
+        }
+      ],
+      "expo-secure-store",
+      "expo-build-properties"
+    ],
     "extra": {
       "eas": {
         "projectId": "3b980e33-ba3e-4d80-8849-bddbdd7d34df"
