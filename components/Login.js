@@ -36,7 +36,7 @@ function Login({ navigation }) {
   const [formData, setFormData] = useState({
     nationalID: "200011233",
     pin: "1111",
-    // pin: "1602",
+    // pin: "1111",
   });
   const [errors, setErrors] = useState({
     // nationalID: "",
