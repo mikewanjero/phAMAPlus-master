@@ -21,6 +21,7 @@ import {
   ScrollView,
   Image,
   Link,
+  Button,
 } from "native-base";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Colors from "../config/colors";
@@ -154,14 +155,26 @@ function Dashboard({ navigation }) {
         <View flex={1} bg="coolGray.100">
           <Box px="2" py="1">
             <VStack>
-              <Text fontSize={"sm"}> Welcome back,</Text>
-              <Text
-                fontWeight={"semibold"}
-                fontSize={"lg"}
-                color={Colors.phAMACoreColor1}
-              >
-                {userData?.membername}
-              </Text>
+              <HStack justifyContent="space-between" alignItems="center">
+                <VStack>
+                  <Text fontSize={"sm"}> Welcome back,</Text>
+                  <Text
+                    fontWeight={"semibold"}
+                    fontSize={"lg"}
+                    color={Colors.phAMACoreColor1}
+                  >
+                    {userData?.membername}
+                  </Text>
+                </VStack>
+                <Button
+                  onPress={() => console.log("Pressed!")}
+                  backgroundColor={"maroon"}
+                  ml={0} // Reset margin-left
+                  px={2} // Adjust padding as needed
+                >
+                  Redeem
+                </Button>
+              </HStack>
             </VStack>
           </Box>
           <View flex={1} p="5" justifyContent="center">
