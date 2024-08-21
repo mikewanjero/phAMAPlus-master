@@ -28,7 +28,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function ForgetPassword({ navigation }) {
   const [isLoading, setIsLoading] = useState(false); // Loading state of action button (Reset Password)
   const [formData, setFormData] = useState({
-    nationalID: "200011233",
+    nationalID: "", //200011233 - previous test user
     pin: "",
     confirmPin: "",
   }); // State displaying data inputs (creating new user) - key and object
