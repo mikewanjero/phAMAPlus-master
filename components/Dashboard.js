@@ -168,8 +168,8 @@ function Dashboard({ navigation }) {
                 </VStack>
                 <Button
                   onPress={() => console.log("Pressed!")}
-                  backgroundColor={"maroon"}
-                  ml={0} // Reset margin-left
+                  backgroundColor={Colors.phAMACoreColor2}
+                  mr={3} // Reset margin-right
                   px={2} // Adjust padding as needed
                 >
                   Redeem
