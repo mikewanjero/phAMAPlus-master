@@ -10,6 +10,7 @@ import Profile from "./components/Profile";
 import Landing from "./components/Landing";
 import Login from "./components/Login";
 import ForgetPassword from "./components/ForgetPassword";
+import Redeem from "./components/Redeem";
 import Signup from "./components/SignUp";
 import TransactionDetails from "./components/TransactionDetails";
 import { Text } from "react-native";
@@ -139,6 +140,13 @@ export default function App() {
           component={TransactionDetails}
           options={{
             headerTitle: "Transactions Details",
+          }}
+        />
+        <Stack.Screen
+          name="Redeem"
+          component={Redeem}
+          options={{
+            headerTitle: "Redeem Points",
           }}
         />
       </Stack.Navigator>
