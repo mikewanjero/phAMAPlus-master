@@ -16,7 +16,7 @@ export default function Redeem({ route, navigation }) {
   //   const { totalPoints } = route.params;
   const [otp, setOtp] = useState("");
   const [ptsToRedeem, setPtsToRedeem] = useState("");
-  //   const [balance, setBalance] = useState(totalPoints);
+  const [balance, setBalance] = useState("");
   const [error, setError] = useState("");
 
   const handleRedeem = () => {
@@ -55,13 +55,15 @@ export default function Redeem({ route, navigation }) {
             />
             <Input
               placeholder="Points to Redeem"
+              keyboardType="numeric"
               value={ptsToRedeem}
               onChangeText={(value) => setPtsToRedeem(value)}
             />
             <Input
-              placeholder="Balance"
-              value={"balance (currently hardcoded)"}
-              onChangeText={(value) => setPtsToRedeem(value)}
+              placeholder="Balance (currently hardcoded)"
+              keyboardType="numeric"
+              value={""}
+              onChangeText={(value) => setBalance(value)}
             />
             <Button
               onPress={handleRedeem}
