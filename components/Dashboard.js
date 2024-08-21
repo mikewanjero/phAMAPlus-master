@@ -167,10 +167,10 @@ function Dashboard({ navigation }) {
                   </Text>
                 </VStack>
                 <Button
-                  onPress={() => console.log("Pressed!")}
+                  onPress={() => navigation.navigate("Redeem")}
                   backgroundColor={Colors.phAMACoreColor2}
                   mr={3} // Reset margin-right
-                  px={2} // Adjust padding as needed
+                  px={2} // Adjusting padding
                 >
                   Redeem
                 </Button>
