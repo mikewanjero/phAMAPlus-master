@@ -167,7 +167,13 @@ function Dashboard({ navigation }) {
                   </Text>
                 </VStack>
                 <Button
-                  onPress={() => navigation.navigate("Redeem")}
+                  onPress={() =>
+                    navigation.navigate("Redeem", {
+                      mempOintSBAL: userData.mempOintSBAL,
+                      mempOintSBUY: userData.mempOintSBUY,
+                      mempOintSREDEEM: userData.mempOintSREDEEM,
+                    })
+                  }
                   backgroundColor={Colors.phAMACoreColor2}
                   mr={3} // Reset margin-right
                   px={2} // Adjusting padding
