@@ -50,6 +50,21 @@ function HomeStackScreen() {
         }}
       />
       <Tab.Screen
+        name="Redeem"
+        component={Redeem}
+        options={{
+          headerShown: false,
+          tabBarLabel: "Redeem",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="gift-open-outline"
+              color={color}
+              size={26}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
         name="Profile"
         component={Profile}
         options={{
@@ -84,6 +99,8 @@ function getHeaderTitle(route) {
     case "Profile":
       return "Profile";
     // return <LogoTitle title={"Profile"} />;
+    case "Redeem":
+      return "Redeem";
   }
 }
 
