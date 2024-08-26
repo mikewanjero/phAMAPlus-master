@@ -78,7 +78,7 @@ export default function Redeem({ route, navigation }) {
 
   return (
     <NativeBaseProvider>
-      <Center flex={1} px={10} bgColor={colors.phAMACoreColor1}>
+      <Center flex={1} px={10} bgColor={"white"}>
         <Avatar bg="blueGray.600" size="xl">
           {userName ? userName.match(/\b([A-Z])/g).join("") : "?"}
         </Avatar>
@@ -120,7 +120,7 @@ export default function Redeem({ route, navigation }) {
           <VStack space={4} mt={3}>
             <Input
               placeholder="OTP"
-              bgColor="white"
+              bgColor={colors.phAMACoreColor1}
               _input={{ color: "black", placeholderTextColor: "black" }}
               value={otp}
               onChangeText={(value) => setOtp(value)}
@@ -129,7 +129,7 @@ export default function Redeem({ route, navigation }) {
             />
             <Input
               isDisabled
-              bgColor="white"
+              bgColor={colors.phAMACoreColor1}
               _input={{ color: "black", placeholderTextColor: "black" }}
               // value={
               //   mempOintSBAL + mempOintSBUY === 0
@@ -143,7 +143,7 @@ export default function Redeem({ route, navigation }) {
             />
             <Input
               placeholder="Points to Redeem"
-              bgColor="white"
+              bgColor={colors.phAMACoreColor1}
               _input={{ color: "black", placeholderTextColor: "black" }}
               keyboardType="numeric"
               // value={mempOintSREDEEM}
@@ -153,7 +153,7 @@ export default function Redeem({ route, navigation }) {
             <Input
               isDisabled
               placeholder="Balance remaining"
-              bgColor="white"
+              bgColor={colors.phAMACoreColor1}
               _input={{ color: "black", placeholderTextColor: "black" }}
               keyboardType="numeric"
               value={""}
