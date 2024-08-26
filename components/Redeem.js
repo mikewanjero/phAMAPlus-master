@@ -120,7 +120,7 @@ export default function Redeem({ route, navigation }) {
           <VStack space={4} mt={3}>
             <Input
               placeholder="OTP"
-              bgColor={colors.phAMACoreColor1}
+              bgColor={"grey"}
               _input={{ color: "black", placeholderTextColor: "black" }}
               value={otp}
               onChangeText={(value) => setOtp(value)}
@@ -129,7 +129,7 @@ export default function Redeem({ route, navigation }) {
             />
             <Input
               isDisabled
-              bgColor={colors.phAMACoreColor1}
+              bgColor={"grey"}
               _input={{ color: "black", placeholderTextColor: "black" }}
               // value={
               //   mempOintSBAL + mempOintSBUY === 0
@@ -143,7 +143,7 @@ export default function Redeem({ route, navigation }) {
             />
             <Input
               placeholder="Points to Redeem"
-              bgColor={colors.phAMACoreColor1}
+              bgColor={"grey"}
               _input={{ color: "black", placeholderTextColor: "black" }}
               keyboardType="numeric"
               // value={mempOintSREDEEM}
@@ -153,7 +153,7 @@ export default function Redeem({ route, navigation }) {
             <Input
               isDisabled
               placeholder="Balance remaining"
-              bgColor={colors.phAMACoreColor1}
+              bgColor={"grey"}
               _input={{ color: "black", placeholderTextColor: "black" }}
               keyboardType="numeric"
               value={""}
