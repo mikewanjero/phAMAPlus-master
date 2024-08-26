@@ -16,16 +16,21 @@ import colors from "../config/colors";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Redeem({ route, navigation }) {
-  const {
-    mempOintSBAL = 0,
-    mempOintSBUY = 0,
-    mempOintSREDEEM = 0,
-  } = route.params;
+  // const {
+  //   mempOintSBAL = 0,
+  //   mempOintSBUY = 0,
+  //   mempOintSREDEEM = 0,
+  // } = route.params;
 
   const [otp, setOtp] = useState("");
   const [balance, setBalance] = useState("");
   const [error, setError] = useState("");
   const [userName, setUserName] = useState("");
+  const [memberPointsData, setMemberPointsData] = useState({
+    mempOintSBAL: 0,
+    mempOintSBUY: 0,
+    mempOintSREDEEM: 0,
+  });
   //   const [userData, setUserData] = useState({});
   //   const { totalPoints } = route.params;
   //   const [ptsToRedeem, setPtsToRedeem] = useState("");
@@ -46,22 +51,26 @@ export default function Redeem({ route, navigation }) {
   };
 
   const handleRedeem = () => {
-    const mempOintSREDEEMInt = parseInt(mempOintSREDEEM, 10);
-    if (mempOintSREDEEMInt > mempOintSBAL) {
-      setError("Points to redeem cannot exceed total points");
-      return;
-    }
-    setError("");
-    const newBalance = mempOintSBAL - mempOintSREDEEMInt;
-    setBalance(newBalance);
-
-    //API Logic to follow
-    alert(
-      `Redeemed ${mempOintSREDEEM} points! You have ${newBalance} points left.`
-    );
-    //After submission, navigation back to Dashboard
-    navigation.goBack();
+    return navigation.goBack();
   };
+
+  // const handleRedeem = () => {
+  //   const mempOintSREDEEMInt = parseInt(mempOintSREDEEM, 10);
+  //   if (mempOintSREDEEMInt > mempOintSBAL) {
+  //     setError("Points to redeem cannot exceed total points");
+  //     return;
+  //   }
+  //   setError("");
+  //   const newBalance = mempOintSBAL - mempOintSREDEEMInt;
+  //   setBalance(newBalance);
+
+  //   //API Logic to follow
+  //   alert(
+  //     `Redeemed ${mempOintSREDEEM} points! You have ${newBalance} points left.`
+  //   );
+  //   //After submission, navigation back to Dashboard
+  //   navigation.goBack();
+  // };
 
   useEffect(() => {
     fetchName();
@@ -122,14 +131,14 @@ export default function Redeem({ route, navigation }) {
               isDisabled
               bgColor="white"
               _input={{ color: "black", placeholderTextColor: "black" }}
-              value={
-                mempOintSBAL + mempOintSBUY === 0
-                  ? "" // This will show the placeholder if the value is 0
-                  : (mempOintSBAL + mempOintSBUY).toString()
-              }
-              placeholder={
-                mempOintSBAL + mempOintSBUY === 0 ? "Total Points" : undefined
-              }
+              // value={
+              //   mempOintSBAL + mempOintSBUY === 0
+              //     ? "" // This will show the placeholder if the value is 0
+              //     : (mempOintSBAL + mempOintSBUY).toString()
+              // }
+              // placeholder={
+              //   mempOintSBAL + mempOintSBUY === 0 ? "Total Points" : undefined
+              // }
               size={20}
             />
             <Input
@@ -137,8 +146,8 @@ export default function Redeem({ route, navigation }) {
               bgColor="white"
               _input={{ color: "black", placeholderTextColor: "black" }}
               keyboardType="numeric"
-              value={mempOintSREDEEM}
-              onChangeText={(value) => mempOintSREDEEM(value)}
+              // value={mempOintSREDEEM}
+              // onChangeText={(value) => mempOintSREDEEM(value)}
               size={20}
             />
             <Input
@@ -148,7 +157,7 @@ export default function Redeem({ route, navigation }) {
               _input={{ color: "black", placeholderTextColor: "black" }}
               keyboardType="numeric"
               value={""}
-              onChangeText={(value) => setBalance(value)}
+              // onChangeText={(value) => setBalance(value)}
               size={20}
             />
             <Button

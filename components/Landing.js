@@ -21,7 +21,13 @@ function Landing({ navigation }) {
     //   // saving error
     //   console.log(e);
     // }
-    return navigation.navigate("Login");
+    // return navigation.navigate("Login");
+    return navigation.push("Login");
+
+    // return navigation.reset({
+    //   index: 0,
+    //   routes: [{ name: "Login" }],
+    // });
   };
   return (
     <NativeBaseProvider>

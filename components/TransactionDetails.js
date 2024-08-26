@@ -106,7 +106,12 @@ function TransactionDetails({ route }) {
               rounded="md"
             >
               <Center mx={"auto"}>
-                <Text mx={"auto"} fontWeight={"500"} color={"#5d3915"}>
+                {/*  5d3915*/}
+                <Text
+                  mx={"auto"}
+                  fontWeight={"500"}
+                  color={Colors.phAMACoreColor1}
+                >
                   {docNum}
                 </Text>
                 <VStack>
@@ -123,15 +128,16 @@ function TransactionDetails({ route }) {
                       />
                     </Center>
                     <Center>
-                      <Text color={"muted.500"} fontWeight="400" fontSize={10}>
+                      <Text color={"muted.500"} fontWeight="400">
                         {branch}
                       </Text>
                     </Center>
                   </HStack>
-                  {/* <Text mx={'auto'} color={'muted.500'}>
-                    {date ? new Date(date).toDateString() : null}
-                  </Text> */}
-                  <Text color="#5d3915" mx={"auto"} fontWeight={500}>
+                  <Text
+                    color={Colors.phAMACoreColor1}
+                    mx={"auto"}
+                    fontWeight={500}
+                  >
                     Kshs:{" "}
                     {transactionDetails
                       .reduce((previousValue, curr) => {
@@ -146,7 +152,7 @@ function TransactionDetails({ route }) {
                     <HStack space={3}>
                       <HStack>
                         <Text>Earned: </Text>
-                        <Text color="success.600">
+                        <Text color="success.600" fontWeight={500}>
                           {gain
                             .toString()
                             .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
@@ -155,7 +161,7 @@ function TransactionDetails({ route }) {
                       <HStack>
                         <Text>Redeemed: </Text>
 
-                        <Text color="danger.600">
+                        <Text color="danger.600" fontWeight={500}>
                           {redeemed
                             .toString()
                             .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}

@@ -93,7 +93,6 @@ function Transactions({ navigation }) {
           </Center>
         ) : transactions.length > 0 ? (
           <ScrollView
-            // bg="indigo.200"
             px={3}
             refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
@@ -120,43 +119,32 @@ function Transactions({ navigation }) {
                   rounded="md"
                   bg="coolGray.100"
                   borderWidth={1}
-                  // shadow={2}
                 >
                   <HStack justifyContent="space-between" alignItems="center">
                     <VStack>
                       <Text
-                        color={"muted.800"}
+                        // color={"muted.800"}
+                        color={Colors.phAMACoreColor1}
                         fontWeight="600"
                         fontSize={"sm"}
                       >
                         {transaction.DOCNUM}
                       </Text>
                       <HStack>
-                        <Text
-                          color={"muted.800"}
-                          fontWeight="400"
-
-                          // style={styles.myText}
-                          // fontSize={'8'}
-                        >
+                        <Text color={"muted.800"} fontWeight="400">
                           {new Date(transaction.SALEDATE).toDateString()}
                         </Text>
                         <Center>
                           <Divider orientation="vertical" h={3} mx={1} />
                         </Center>
 
-                        <Text
-                          color={"muted.800"}
-                          fontWeight="400"
-
-                          // style={styles.myText}
-                          // fontSize={'8'}
-                        >
+                        <Text color={"muted.800"} fontWeight="400">
                           {transaction.SALESBRANCH}
                         </Text>
                       </HStack>
                       <Text
-                        color={"muted.800"}
+                        // color={"muted.800"}
+                        color={Colors.phAMACoreColor1}
                         fontWeight="600"
                         fontSize={"sm"}
                       >
@@ -166,23 +154,14 @@ function Transactions({ navigation }) {
                           .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                       </Text>
                       <HStack space={3}>
-                        <Text
-                          color="success.600"
-                          fontWeight="400"
-                          // style={styles.myText}
-                        >
+                        <Text color="success.600" fontWeight="500">
                           Earned:{" "}
                           {transaction.MEMPOINTSBUY.toString().replace(
                             /\B(?=(\d{3})+(?!\d))/g,
                             ","
                           )}
                         </Text>
-
-                        <Text
-                          color="danger.600"
-                          fontWeight="400"
-                          // style={styles.myText}
-                        >
+                        <Text color="danger.600" fontWeight="500">
                           Redeemed:{" "}
                           {transaction.MEMPOINTSREDEEM.toString().replace(
                             /\B(?=(\d{3})+(?!\d))/g,
@@ -194,7 +173,6 @@ function Transactions({ navigation }) {
                     <Image
                       source={require("../assets/right.png")}
                       alt="company logo"
-                      // style={styles.companyLogo}
                       size="2xs"
                     />
                   </HStack>

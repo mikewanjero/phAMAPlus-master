@@ -11,9 +11,7 @@ import Landing from "./components/Landing";
 import Login from "./components/Login";
 import ForgetPassword from "./components/ForgetPassword";
 import Redeem from "./components/Redeem";
-import Signup from "./components/SignUp";
 import TransactionDetails from "./components/TransactionDetails";
-import { Text } from "react-native";
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -42,7 +40,7 @@ function HomeStackScreen() {
         name="Transactions"
         component={Transactions}
         options={{
-          headerShown: false,
+          headerShown: true,
           tabBarLabel: "Transactions",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="bank" color={color} size={26} />
@@ -53,7 +51,7 @@ function HomeStackScreen() {
         name="Redeem"
         component={Redeem}
         options={{
-          headerShown: false,
+          headerShown: true,
           tabBarLabel: "Redeem",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
@@ -68,7 +66,7 @@ function HomeStackScreen() {
         name="Profile"
         component={Profile}
         options={{
-          headerShown: false,
+          headerShown: true,
           tabBarLabel: "Profile",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="account" color={color} size={26} />
@@ -77,10 +75,6 @@ function HomeStackScreen() {
       />
     </Tab.Navigator>
   );
-}
-
-function LogoTitle({ title }) {
-  return <Text>{title} </Text>;
 }
 
 function getHeaderTitle(route) {
@@ -92,13 +86,10 @@ function getHeaderTitle(route) {
   switch (routeName) {
     case "Home":
       return "Dashboard";
-    // return <LogoTitle title={"asd"} />;
     case "Transactions":
       return "Transactions";
-    // return <LogoTitle title={"Transactions"} />;
     case "Profile":
       return "Profile";
-    // return <LogoTitle title={"Profile"} />;
     case "Redeem":
       return "Redeem";
   }
@@ -149,7 +140,7 @@ export default function App() {
           component={HomeStackScreen}
           options={({ route }) => ({
             headerTitle: getHeaderTitle(route),
-            // headerShown: false,
+            headerShown: true,
           })}
         />
         <Stack.Screen
@@ -157,6 +148,7 @@ export default function App() {
           component={TransactionDetails}
           options={{
             headerTitle: "Transactions Details",
+            headerShown: true,
           }}
         />
         <Stack.Screen
@@ -164,6 +156,7 @@ export default function App() {
           component={Redeem}
           options={{
             headerTitle: "Redeem Points",
+            headerShown: true,
           }}
         />
       </Stack.Navigator>
