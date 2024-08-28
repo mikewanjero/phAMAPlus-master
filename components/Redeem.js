@@ -10,6 +10,7 @@ import {
   Center,
   Heading,
   Divider,
+  FormControl,
 } from "native-base";
 import { useEffect, useState } from "react";
 import colors from "../config/colors";
@@ -118,48 +119,65 @@ export default function Redeem({ route, navigation }) {
             Enter points to be redeemed below.
           </Heading>
           <VStack space={4} mt={3}>
-            <Input
-              placeholder="OTP"
-              bgColor={"grey"}
-              _input={{ color: "black", placeholderTextColor: "black" }}
-              value={otp}
-              onChangeText={(value) => setOtp(value)}
-              keyboardType="numeric"
-              size={20}
-            />
-            <Input
-              isDisabled
-              bgColor={"grey"}
-              _input={{ color: "black", placeholderTextColor: "black" }}
-              // value={
-              //   mempOintSBAL + mempOintSBUY === 0
-              //     ? "" // This will show the placeholder if the value is 0
-              //     : (mempOintSBAL + mempOintSBUY).toString()
-              // }
-              // placeholder={
-              //   mempOintSBAL + mempOintSBUY === 0 ? "Total Points" : undefined
-              // }
-              size={20}
-            />
-            <Input
-              placeholder="Points to Redeem"
-              bgColor={"grey"}
-              _input={{ color: "black", placeholderTextColor: "black" }}
-              keyboardType="numeric"
-              // value={mempOintSREDEEM}
-              // onChangeText={(value) => mempOintSREDEEM(value)}
-              size={20}
-            />
-            <Input
-              isDisabled
-              placeholder="Balance remaining"
-              bgColor={"grey"}
-              _input={{ color: "black", placeholderTextColor: "black" }}
-              keyboardType="numeric"
-              value={""}
-              // onChangeText={(value) => setBalance(value)}
-              size={20}
-            />
+            <FormControl>
+              <FormControl.Label>OTP</FormControl.Label>
+              <Input
+                placeholder=""
+                // bgColor={"grey"}
+                _input={{ color: "black", placeholderTextColor: "black" }}
+                value={otp}
+                onChangeText={(value) => setOtp(value)}
+                keyboardType="numeric"
+                size={20}
+              />
+            </FormControl>
+
+            <FormControl>
+              <FormControl.Label>Available Points</FormControl.Label>
+              <Input
+                isDisabled
+                // bgColor={"grey"}
+                _input={{ color: "black", placeholderTextColor: "black" }}
+                placeholder=""
+                // value={
+                //   mempOintSBAL + mempOintSBUY === 0
+                //     ? "" // This will show the placeholder if the value is 0
+                //     : (mempOintSBAL + mempOintSBUY).toString()
+                // }
+                // placeholder={
+                //   mempOintSBAL + mempOintSBUY === 0 ? "Total Points" : undefined
+                // }
+                size={20}
+              />
+            </FormControl>
+
+            <FormControl>
+              <FormControl.Label>Points to Redeem</FormControl.Label>
+              <Input
+                placeholder=""
+                // bgColor={"grey"}
+                _input={{ color: "black", placeholderTextColor: "black" }}
+                keyboardType="numeric"
+                // value={mempOintSREDEEM}
+                // onChangeText={(value) => mempOintSREDEEM(value)}
+                size={20}
+              />
+            </FormControl>
+
+            <FormControl>
+              <FormControl.Label>Balance remaining</FormControl.Label>
+              <Input
+                isDisabled
+                placeholder=""
+                // bgColor={"grey"}
+                _input={{ color: "black", placeholderTextColor: "black" }}
+                keyboardType="numeric"
+                value={""}
+                // onChangeText={(value) => setBalance(value)}
+                size={20}
+              />
+            </FormControl>
+
             <Button
               onPress={handleRedeem}
               backgroundColor={colors.phAMACoreColor2}
