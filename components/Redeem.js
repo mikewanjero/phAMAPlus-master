@@ -136,9 +136,10 @@ export default function Redeem({ route, navigation }) {
               <FormControl.Label>Available Points</FormControl.Label>
               <Input
                 isDisabled
-                // bgColor={"grey"}
                 _input={{ color: "black", placeholderTextColor: "black" }}
                 placeholder=""
+                size={20}
+                keyboardType="numeric"
                 // value={
                 //   mempOintSBAL + mempOintSBUY === 0
                 //     ? "" // This will show the placeholder if the value is 0
@@ -147,7 +148,6 @@ export default function Redeem({ route, navigation }) {
                 // placeholder={
                 //   mempOintSBAL + mempOintSBUY === 0 ? "Total Points" : undefined
                 // }
-                size={20}
               />
             </FormControl>
 
@@ -155,7 +155,6 @@ export default function Redeem({ route, navigation }) {
               <FormControl.Label>Points to Redeem</FormControl.Label>
               <Input
                 placeholder=""
-                // bgColor={"grey"}
                 _input={{ color: "black", placeholderTextColor: "black" }}
                 keyboardType="numeric"
                 // value={mempOintSREDEEM}
@@ -169,7 +168,6 @@ export default function Redeem({ route, navigation }) {
               <Input
                 isDisabled
                 placeholder=""
-                // bgColor={"grey"}
                 _input={{ color: "black", placeholderTextColor: "black" }}
                 keyboardType="numeric"
                 value={""}
