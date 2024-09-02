@@ -135,7 +135,7 @@ export default function Redeem({ route, navigation }) {
             <FormControl>
               <FormControl.Label>Available Points</FormControl.Label>
               <Input
-                isDisabled
+                isReadOnly
                 _input={{ color: "black", placeholderTextColor: "black" }}
                 placeholder=""
                 size={20}
@@ -166,7 +166,7 @@ export default function Redeem({ route, navigation }) {
             <FormControl>
               <FormControl.Label>Balance remaining</FormControl.Label>
               <Input
-                isDisabled
+                isReadOnly
                 placeholder=""
                 _input={{ color: "black", placeholderTextColor: "black" }}
                 keyboardType="numeric"
