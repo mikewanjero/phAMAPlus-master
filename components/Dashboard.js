@@ -35,20 +35,6 @@ function Dashboard({ navigation }) {
   const [refreshing, setRefreshing] = useState(false);
   // PPL000101
 
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     const onBackPress = () => {
-  //       navigation.navigate("Landing");
-  //       return true;
-  //     };
-
-  //     BackHandler.addEventListener("hardwareBackPress", onBackPress);
-
-  //     return () =>
-  //       BackHandler.removeEventListener("hardwareBackPress", onBackPress);
-  //   }, [navigation])
-  // );
-
   const handleTransactions = async () => {
     setIsLoading(true);
     let token = await AsyncStorage.getItem("token");
@@ -169,20 +155,6 @@ function Dashboard({ navigation }) {
                     </Text>
                     <Text fontSize={"sm"}> Welcome back!</Text>
                   </VStack>
-                  {/* <Button
-                  onPress={() =>
-                    navigation.navigate("Redeem", {
-                      mempOintSBAL: userData.mempOintSBAL,
-                      mempOintSBUY: userData.mempOintSBUY,
-                      mempOintSREDEEM: userData.mempOintSREDEEM,
-                    })
-                  }
-                  backgroundColor={Colors.phAMACoreColor2}
-                  mr={3} // Reset margin-right
-                  px={2} // Adjusting padding
-                >
-                  Redeem
-                </Button> */}
                 </HStack>
               </VStack>
             </Box>
@@ -212,24 +184,6 @@ function Dashboard({ navigation }) {
                   >
                     {userData.mempOintSBAL ?? 0} pts
                   </Text>
-                  {/* <HStack
-                  alignItems="center"
-                  space={4}
-                  justifyContent="space-between"
-                >
-                  <HStack alignItems="center">
-                    <Text
-                      color="coolGray.600"
-                      _dark={{
-                        color: "warmGray.200",
-                      }}
-                      fontWeight="300"
-                      fontSize="xs"
-                    >
-                      Points Details
-                    </Text>
-                  </HStack>
-                </HStack> */}
                 </Stack>
                 <HStack
                   alignItems="center"
