@@ -32,9 +32,6 @@ export default function Redeem({ route, navigation }) {
     mempOintSBUY: 0,
     mempOintSREDEEM: 0,
   });
-  //   const [userData, setUserData] = useState({});
-  //   const { totalPoints } = route.params;
-  //   const [ptsToRedeem, setPtsToRedeem] = useState("");
 
   const fetchName = async () => {
     try {
@@ -55,22 +52,8 @@ export default function Redeem({ route, navigation }) {
     return navigation.goBack();
   };
 
-  // const handleRedeem = () => {
-  //   const mempOintSREDEEMInt = parseInt(mempOintSREDEEM, 10);
-  //   if (mempOintSREDEEMInt > mempOintSBAL) {
-  //     setError("Points to redeem cannot exceed total points");
-  //     return;
-  //   }
-  //   setError("");
-  //   const newBalance = mempOintSBAL - mempOintSREDEEMInt;
-  //   setBalance(newBalance);
-
-  //   //API Logic to follow
-  //   alert(
-  //     `Redeemed ${mempOintSREDEEM} points! You have ${newBalance} points left.`
-  //   );
-  //   //After submission, navigation back to Dashboard
-  //   navigation.goBack();
+  // const pointsBalance = async (memberPointsData) => {
+  //   setMemberPointsData(memberPointsData);
   // };
 
   useEffect(() => {
