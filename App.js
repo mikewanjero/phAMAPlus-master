@@ -10,8 +10,8 @@ import Profile from "./components/Profile";
 import Landing from "./components/Landing";
 import Login from "./components/Login";
 import ForgetPassword from "./components/ForgetPassword";
-import Redeem from "./components/Redeem";
 import TransactionDetails from "./components/TransactionDetails";
+// import Redeem from "./components/Redeem";
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -48,6 +48,17 @@ function HomeStackScreen() {
         }}
       />
       <Tab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          headerShown: true,
+          tabBarLabel: "Profile",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="account" color={color} size={26} />
+          ),
+        }}
+      />
+      {/* <Tab.Screen
         name="Redeem"
         component={Redeem}
         options={{
@@ -61,18 +72,7 @@ function HomeStackScreen() {
             />
           ),
         }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          headerShown: true,
-          tabBarLabel: "Profile",
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="account" color={color} size={26} />
-          ),
-        }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 }
@@ -90,8 +90,8 @@ function getHeaderTitle(route) {
       return "Transactions";
     case "Profile":
       return "Profile";
-    case "Redeem":
-      return "Redeem";
+    // case "Redeem":
+    //   return "Redeem";
   }
 }
 
@@ -151,14 +151,14 @@ export default function App() {
             headerShown: true,
           }}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Redeem"
           component={Redeem}
           options={{
             headerTitle: "Redeem Points",
             headerShown: true,
           }}
-        />
+        /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
