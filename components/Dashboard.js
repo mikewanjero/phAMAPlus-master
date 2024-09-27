@@ -233,15 +233,10 @@ function Dashboard({ navigation }) {
                 >
                   <VStack mx={"auto"}>
                     <Text mx={"auto"} fontWeight="200">
-                      Available
+                      Redeemed
                     </Text>
-
-                    <Text
-                      mx={"auto"}
-                      fontWeight={"bold"}
-                      color={Colors.success}
-                    >
-                      {userData.mempOintSBAL ?? 0} pts
+                    <Text mx={"auto"} fontWeight={"bold"} color={Colors.danger}>
+                      {userData.mempOintSREDEEM ?? 0} pts
                     </Text>
                   </VStack>
 
@@ -262,10 +257,14 @@ function Dashboard({ navigation }) {
                   <Divider thickness="1" mx="2" orientation="vertical" />
                   <VStack mx={"auto"}>
                     <Text mx={"auto"} fontWeight="200">
-                      Redeemed
+                      Available
                     </Text>
-                    <Text mx={"auto"} fontWeight={"bold"} color={Colors.danger}>
-                      {userData.mempOintSREDEEM ?? 0} pts
+                    <Text
+                      mx={"auto"}
+                      fontWeight={"bold"}
+                      color={Colors.success}
+                    >
+                      {userData.mempOintSBAL ?? 0} pts
                     </Text>
                   </VStack>
                 </Flex>
