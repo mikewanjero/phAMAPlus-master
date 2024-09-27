@@ -233,16 +233,6 @@ function Dashboard({ navigation }) {
                 >
                   <VStack mx={"auto"}>
                     <Text mx={"auto"} fontWeight="200">
-                      Redeemed
-                    </Text>
-                    <Text mx={"auto"} fontWeight={"bold"} color={Colors.danger}>
-                      {userData.mempOintSREDEEM ?? 0} pts
-                    </Text>
-                  </VStack>
-
-                  <Divider thickness="1" mx="2" orientation="vertical" />
-                  <VStack mx={"auto"}>
-                    <Text mx={"auto"} fontWeight="200">
                       Gained
                     </Text>
                     <Text
@@ -251,6 +241,16 @@ function Dashboard({ navigation }) {
                       color={Colors.phAMACoreColor1}
                     >
                       {userData.mempOintSBUY ?? 0} pts
+                    </Text>
+                  </VStack>
+
+                  <Divider thickness="1" mx="2" orientation="vertical" />
+                  <VStack mx={"auto"}>
+                    <Text mx={"auto"} fontWeight="200">
+                      Redeemed
+                    </Text>
+                    <Text mx={"auto"} fontWeight={"bold"} color={Colors.danger}>
+                      {userData.mempOintSREDEEM ?? 0} pts
                     </Text>
                   </VStack>
 
