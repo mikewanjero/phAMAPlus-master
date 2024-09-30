@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import Colors from "../config/colors";
 import {
@@ -10,25 +10,32 @@ import {
   Text,
   Image,
 } from "native-base";
-// import * as SecureStore from "expo-secure-store";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function Landing({ navigation }) {
-  const storeData = async () => {
-    // try {
-    //   const jsonValue = JSON.stringify(value);
-    //   await AsyncStorage.setItem("@storage_Key", jsonValue);
-    // } catch (e) {
-    //   // saving error
-    //   console.log(e);
-    // }
-    // return navigation.navigate("Login");
-    return navigation.push("Login");
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        const token = await AsyncStorage.getItem("authToken");
+        if (token) {
+          // If a token exists, navigate to the Dashboard
+          navigation.reset({
+            index: 0,
+            routes: [{ name: "Dashboard" }],
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching token from AsyncStorage:", error);
+      }
+    };
 
-    // return navigation.reset({
-    //   index: 0,
-    //   routes: [{ name: "Login" }],
-    // });
+    checkLoginStatus();
+  }, [navigation]);
+
+  const storeData = () => {
+    return navigation.push("Login");
   };
+
   return (
     <NativeBaseProvider>
       <View style={styles.container}>
@@ -50,7 +57,6 @@ function Landing({ navigation }) {
           </Box>
         </View>
         <View style={styles.box3}>
-          {/* bg="indigo.700" */}
           <Center flex={1}>
             <Pressable onPress={storeData}>
               {({ isHovered, isFocused, isPressed }) => {
@@ -103,10 +109,6 @@ const styles = StyleSheet.create({
   box3: {
     flex: 1,
   },
-  //   image: {
-  //     maxWidth: 350,
-  //     maxHeight: 350,
-  //   },
   title: {
     fontSize: 26,
     textAlign: "center",

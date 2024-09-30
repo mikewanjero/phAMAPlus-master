@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
@@ -10,8 +11,8 @@ import Profile from "./components/Profile";
 import Landing from "./components/Landing";
 import Login from "./components/Login";
 import ForgetPassword from "./components/ForgetPassword";
+import SplashScreen from "./components/SplashScreen";
 import TransactionDetails from "./components/TransactionDetails";
-// import Redeem from "./components/Redeem";
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -58,21 +59,6 @@ function HomeStackScreen() {
           ),
         }}
       />
-      {/* <Tab.Screen
-        name="Redeem"
-        component={Redeem}
-        options={{
-          headerShown: true,
-          tabBarLabel: "Redeem",
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="gift-open-outline"
-              color={color}
-              size={26}
-            />
-          ),
-        }}
-      /> */}
     </Tab.Navigator>
   );
 }
@@ -90,24 +76,42 @@ function getHeaderTitle(route) {
       return "Transactions";
     case "Profile":
       return "Profile";
-    // case "Redeem":
-    //   return "Redeem";
   }
 }
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        const token = await AsyncStorage.getItem("token");
+        if (token) {
+          setIsAuthenticated(true);
+        }
+      } catch (e) {
+        console.error("Failed to fetch the token.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    checkLoginStatus();
+  }, []);
+
+  if (isLoading) {
+    return <SplashScreen />; // Simple splash screen while checking authentication
+  }
+
   return (
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
-          // headerStyle: {
-          //   backgroundColor: "#f4511e",
-          // },
           animationTypeForReplace: "push",
           animation: "slide_from_right",
           headerLeft: null,
           headerBackVisible: false,
-          // headerTintColor: "#fff",
           headerTitleStyle: {
             fontWeight: "bold",
             fontSize: 30,
@@ -151,14 +155,6 @@ export default function App() {
             headerShown: true,
           }}
         />
-        {/* <Stack.Screen
-          name="Redeem"
-          component={Redeem}
-          options={{
-            headerTitle: "Redeem Points",
-            headerShown: true,
-          }}
-        /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

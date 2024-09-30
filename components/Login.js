@@ -27,22 +27,29 @@ import {
 import { MaterialIcons } from "@expo/vector-icons";
 // import * as SecureStore from "expo-secure-store";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useEffect } from "react";
 
 // import { API_URL } from "@env";
 
 function Login({ navigation }) {
   const [error, setError] = useState("");
-
-  const [formData, setFormData] = useState({
-    nationalID: "",
-    pin: "",
-  });
-  const [errors, setErrors] = useState({
-    // nationalID: "",
-    // pin: "",
-  });
+  const [formData, setFormData] = useState({ nationalID: "", pin: "" });
+  const [errors, setErrors] = useState({});
   const [show, setShow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const checkLogin = async () => {
+      const token = await AsyncStorage.getItem("token");
+      if (token) {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "Dashboard" }],
+        });
+      }
+    };
+    checkLogin();
+  }, []);
   /**
    * TODO: Handle Validate form
    */
@@ -85,9 +92,6 @@ function Login({ navigation }) {
         }
       );
 
-      // const responseText = await response.text();
-      // console.log("Response Text: ", responseText);
-
       const data = await response.json();
       if (response.ok) {
         console.log(data);
@@ -109,9 +113,11 @@ function Login({ navigation }) {
     } catch (error) {
       console.log(error);
       setIsLoading(false);
-      setError("An error occured processing your current request!");
+      setError("An error occured during login!");
       // ADD THIS THROW error
       throw new Error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -273,26 +279,6 @@ function Login({ navigation }) {
               >
                 Sign in
               </Button>
-              {/* <HStack my="3" justifyContent="center">
-                <Text
-                  fontSize="sm"
-                  color="coolGray.600"
-                  _dark={{
-                    color: "warmGray.200",
-                  }}
-                >
-                  I'm a new user.{" "}
-                </Text>
-                <Link
-                  _text={{
-                    color: "indigo.500",
-                    fontWeight: "medium",
-                    fontSize: "sm",
-                  }}
-                >
-                  Sign Up
-                </Link>
-              </HStack> */}
             </VStack>
           </Box>
         </Center>
@@ -300,27 +286,5 @@ function Login({ navigation }) {
     </NativeBaseProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.phAMACoreColor1,
-  },
-  box1: {
-    flex: 3,
-    backgroundColor: Colors.danger,
-  },
-  box2: {
-    flex: 1,
-    justifyContent: "center",
-  },
-  box3: {
-    flex: 1,
-  },
-  //   image: {
-  //     maxWidth: 350,
-  //     maxHeight: 350,
-  //   },
-});
 
 export default Login;
