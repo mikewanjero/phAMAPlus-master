@@ -123,7 +123,7 @@ function Dashboard({ navigation }) {
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
     handleDashboard();
-    // handleTransactions();
+    handleTransactions();
     wait(2000).then(() => setRefreshing(false));
   }, []);
 
