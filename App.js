@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
@@ -11,7 +10,6 @@ import Profile from "./components/Profile";
 import Landing from "./components/Landing";
 import Login from "./components/Login";
 import ForgetPassword from "./components/ForgetPassword";
-import SplashScreen from "./components/SplashScreen";
 import TransactionDetails from "./components/TransactionDetails";
 
 const Stack = createNativeStackNavigator();
@@ -80,30 +78,6 @@ function getHeaderTitle(route) {
 }
 
 export default function App() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  useEffect(() => {
-    const checkLoginStatus = async () => {
-      try {
-        const token = await AsyncStorage.getItem("token");
-        if (token) {
-          setIsAuthenticated(true);
-        }
-      } catch (e) {
-        console.error("Failed to fetch the token.");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    checkLoginStatus();
-  }, []);
-
-  if (isLoading) {
-    return <SplashScreen />; // Simple splash screen while checking authentication
-  }
-
   return (
     <NavigationContainer>
       <Stack.Navigator

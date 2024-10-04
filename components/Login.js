@@ -27,7 +27,6 @@ import {
 import { MaterialIcons } from "@expo/vector-icons";
 // import * as SecureStore from "expo-secure-store";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useEffect } from "react";
 
 // import { API_URL } from "@env";
 
@@ -38,18 +37,6 @@ function Login({ navigation }) {
   const [show, setShow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    const checkLogin = async () => {
-      const token = await AsyncStorage.getItem("token");
-      if (token) {
-        navigation.reset({
-          index: 0,
-          routes: [{ name: "Dashboard" }],
-        });
-      }
-    };
-    checkLogin();
-  }, []);
   /**
    * TODO: Handle Validate form
    */
@@ -288,3 +275,21 @@ function Login({ navigation }) {
 }
 
 export default Login;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: Colors.phAMACoreColor1,
+  },
+  box1: {
+    flex: 3,
+    backgroundColor: Colors.danger,
+  },
+  box2: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  box3: {
+    flex: 1,
+  },
+});

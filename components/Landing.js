@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { StyleSheet, View } from "react-native";
 import Colors from "../config/colors";
 import {
@@ -10,28 +10,8 @@ import {
   Text,
   Image,
 } from "native-base";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function Landing({ navigation }) {
-  useEffect(() => {
-    const checkLoginStatus = async () => {
-      try {
-        const token = await AsyncStorage.getItem("authToken");
-        if (token) {
-          // If a token exists, navigate to the Dashboard
-          navigation.reset({
-            index: 0,
-            routes: [{ name: "Dashboard" }],
-          });
-        }
-      } catch (error) {
-        console.error("Error fetching token from AsyncStorage:", error);
-      }
-    };
-
-    checkLoginStatus();
-  }, [navigation]);
-
   const storeData = () => {
     return navigation.push("Login");
   };
