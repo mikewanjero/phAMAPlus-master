@@ -79,6 +79,11 @@ function Login({ navigation }) {
         }
       );
 
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to login");
+      }
+
       const data = await response.json();
       if (response.ok) {
         console.log(data);
