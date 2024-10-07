@@ -164,9 +164,8 @@ function Login({ navigation }) {
             </Text>
           </Alert>
         )}
-        {/*  w="100%" */}
-        <Center px="5" flex={1} bg="coolGray.200">
-          <Box p="2" w="100%" flex={1}>
+        <Center px="7" flex={1} bg="coolGray.200" mt={"-25%"}>
+          <Box p="6" w="100%" flex={1}>
             <Heading
               size="lg"
               fontWeight="700"
