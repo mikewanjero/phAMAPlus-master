@@ -19,7 +19,16 @@ function Landing({ navigation }) {
   return (
     <NativeBaseProvider>
       <View style={styles.container}>
-        <View flex={3}>
+        <View flex={1}>
+          <Center flex={1}>
+            <Image
+              source={require("../assets/pcico.png")}
+              alt="Alternate Text"
+              resizeMode="contain"
+            />
+          </Center>
+        </View>
+        <View flex={2}>
           <Center flex={1}>
             <Image
               source={require("../assets/shopping.png")}
@@ -32,7 +41,7 @@ function Landing({ navigation }) {
           <Box p="5">
             <Heading size="2xl">Find a way to manage</Heading>
             <Heading size="2xl">your Transactions</Heading>
-            <Text fontSize="md">Best Solution to save your</Text>
+            <Text fontSize="md">Best Solution to view your</Text>
             <Text fontSize="md">loyalty points & transactions</Text>
           </Box>
         </View>
