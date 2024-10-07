@@ -28,7 +28,8 @@
     "react-native-svg": "^15.2.0",
     "react-native-toast-message": "^2.2.0",
     "react-native-vector-icons": "^10.0.3",
-    "updates": "^16.4.0"
+    "updates": "^16.4.0",
+    "expo-dev-client": "~4.0.27"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
