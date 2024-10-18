@@ -141,8 +141,9 @@ export default function ForgetPassword({ navigation }) {
             />
             <Heading
               size={"2xl"}
-              fontWeight={"bold"}
+              fontWeight={"900"}
               color={colors.phAMACoreColor1}
+              mt="30px"
             >
               phAMACore™ Loyalty
             </Heading>
@@ -174,7 +175,7 @@ export default function ForgetPassword({ navigation }) {
             </Text>
           </Alert>
         )}
-        <Center px={5} flex={1} bgColor={"coolGray.200"}>
+        <Center px={5} flex={2} bgColor={"coolGray.200"}>
           <Box p={"2"} w={"100%"} flex={1}>
             <Heading
               size={"lg"}
@@ -194,7 +195,7 @@ export default function ForgetPassword({ navigation }) {
             </Heading>
             <VStack space={3} mt={"5"}>
               <ScrollView>
-                <FormControl>
+                <FormControl mt={"10"}>
                   <FormControl.Label>National ID</FormControl.Label>
                   <Input
                     placeholder="12345678"
@@ -207,74 +208,6 @@ export default function ForgetPassword({ navigation }) {
                     borderColor={"gray.400"}
                   />
                 </FormControl>
-                {/* <FormControl>
-                  <FormControl.Label>Password</FormControl.Label>
-                  <Input
-                    type={show ? "text" : "password"}
-                    keyboardType="numeric"
-                    value={formData.pin}
-                    onChangeText={(value) =>
-                      setFormData({ ...formData, pin: value })
-                    }
-                    borderWidth={1}
-                    borderColor={"gray.400"}
-                    InputRightElement={
-                      <Pressable onPress={() => setShow(!show)}>
-                        <Icon
-                          as={
-                            <MaterialIcons
-                              name={show ? "visibility" : "visibility-off"}
-                            />
-                          }
-                          size={5}
-                          mr={2}
-                          color={"gray.600"}
-                        />
-                      </Pressable>
-                    }
-                  />
-                  {"pin" in errors ? (
-                    <FormControl.ErrorMessage>
-                      {errors.pin}
-                    </FormControl.ErrorMessage>
-                  ) : (
-                    ""
-                  )}
-                </FormControl>
-                <FormControl>
-                  <FormControl.Label>Confirm Password</FormControl.Label>
-                  <Input
-                    type={show ? "text" : "password"}
-                    keyboardType="numeric"
-                    value={formData.confirmPin}
-                    onChangeText={(value) =>
-                      setFormData({ ...formData, confirmPin: value })
-                    }
-                    borderWidth={1}
-                    borderColor={"gray.400"}
-                    InputRightElement={
-                      <Pressable onPress={() => setShow(!show)}>
-                        <Icon
-                          as={
-                            <MaterialIcons
-                              name={show ? "visibility" : "visibility-off"}
-                            />
-                          }
-                          size={5}
-                          mr={2}
-                          color={"gray.600"}
-                        />
-                      </Pressable>
-                    }
-                  />
-                  {"confirmPin" in errors ? (
-                    <FormControl.ErrorMessage>
-                      {errors.confirmPin}
-                    </FormControl.ErrorMessage>
-                  ) : (
-                    ""
-                  )}
-                </FormControl> */}
                 <Button
                   mt={"7"}
                   bg={colors.phAMACoreColor2}

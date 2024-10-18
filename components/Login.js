@@ -131,7 +131,7 @@ function Login({ navigation }) {
         flex={1}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
-        <View flex={1} bg="coolGray.50">
+        <View flex={1} bg="coolGray.50" mb={"50px"}>
           <Center flex={1}>
             <Image
               source={require("../assets/pcico.png")}
@@ -145,6 +145,7 @@ function Login({ navigation }) {
               _dark={{
                 color: "warmGray.50",
               }}
+              mt="15px"
             >
               phAMACore™ Loyalty
             </Heading>
@@ -164,12 +165,12 @@ function Login({ navigation }) {
             </Text>
           </Alert>
         )}
-        <Center px="7" flex={1} bg="coolGray.200" mt={"-25%"}>
+        <Center px="7" flex={2} bg="coolGray.200" mt={"-25%"}>
           <Box p="6" w="100%" flex={1}>
             <Heading
               size="lg"
               fontWeight="700"
-              color="coolGray.800"
+              color={Colors.phAMACoreColor1}
               _dark={{
                 color: "warmGray.50",
               }}
@@ -181,14 +182,14 @@ function Login({ navigation }) {
               _dark={{
                 color: "warmGray.200",
               }}
-              color="coolGray.600"
+              color={Colors.phAMACoreColor1}
               fontWeight="medium"
               size="xs"
             >
               Sign in to continue!
             </Heading>
 
-            <VStack space={3} mt="5">
+            <VStack space={3} mt="10">
               <FormControl isRequired isInvalid={"nationalID" in errors}>
                 <FormControl.Label>National ID</FormControl.Label>
                 <Input
@@ -267,6 +268,7 @@ function Login({ navigation }) {
                 isLoading={isLoading}
                 isLoadingText="Submitting"
                 onPress={handleSubmit}
+                marginTop="20px"
               >
                 Sign in
               </Button>
