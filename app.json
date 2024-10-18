@@ -4,7 +4,7 @@
     "slug": "phamacoreapp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/ic_launcher_round.png",
+    "icon": "./assets/ic_launcher_round (3).png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/launch_screen.png",
@@ -17,7 +17,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/pcico.png",
+        "foregroundImage": "./assets/ic_launcher_round (1).png",
         "backgroundColor": "#ffffff",
         "foregroundImageResizeMode": "contain"
       },
